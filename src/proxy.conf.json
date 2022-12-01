@@ -1,0 +1,11 @@
+{
+    "/kaddem/*":{
+        "target":"http://localhost:8089/",
+        "secure":false,
+        "pathRewrite":{
+            "^/kaddem":""
+        },
+        "changeOrigin":false,
+        "logLevel":"debug"
+    }
+}
