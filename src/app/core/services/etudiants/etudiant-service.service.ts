@@ -15,7 +15,7 @@ export class EtudiantServiceService {
   url = "http://localhost:8089/kaddem/api/etudiant/retrieve-all-etudiants";
 
   
-  getAllEtudiants(){
+  getAllEquipes(){
    return this.http.get<Etudiant[]>(this.url);
   }
 }

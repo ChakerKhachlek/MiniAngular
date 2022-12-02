@@ -1,8 +1,53 @@
-
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <p>manage-equipes works!</p>
+
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    <th>
+                                        Niveau
+                                    </th>
+                                  
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let e of listEquipes">
+                                        <td>
+                                            {{e.idEquipe}}
+                                        </td>
+                                        <td>
+                                            {{e.nomEquipe}}
+                                        </td>
+                                        <td>
+                                            {{e.niveau}}
+                                        </td>
+                            
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
+            
+
+        </div>
+    </div>
+  </div>
+  

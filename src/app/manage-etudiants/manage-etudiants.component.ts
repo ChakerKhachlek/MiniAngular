@@ -18,7 +18,7 @@ export class ManageEtudiantsComponent {
   }
 
   getEtudiants(){
-    this.etudiantService.getAllEtudiants().subscribe(data => {
+    this.etudiantService.getAllEquipes().subscribe(data => {
       this.listEtudiants= data;
       console.log(data);
       
