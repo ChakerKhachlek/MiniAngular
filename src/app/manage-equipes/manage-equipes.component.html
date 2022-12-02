@@ -1,13 +1,67 @@
+<!-- form-->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-
-
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title">Ajouter Equipe</h4>
+                        <p class="card-category">Veuillez saisir les informations de l'équipe</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="registerform" (ngSubmit)="register()">
+                            <div class="row">
+                                <div class="col-md-7">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Nom" formControlName="nom" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Niveau</mat-label>
+                                        <select matNativeControl required>
+                                            <option value="EXPERT">EXPERT</option>
+                                            <option value="SENIOR">SENIOR</option>
+                                            <option value="JUNIOR">JUNIOR</option>
+                                        </select>                                   
+                                     </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Thematique" type="text" formControlName="thematique" required>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Salle" type="number" formControlName="salle"  required>
+                                    </mat-form-field>
+                                </div>
+                                
+                           </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+   
+        </div>
+    </div>
+  </div>
+<!--end form-->  
+<!--table-->
+
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Equipes</h4>
+                        <p class="card-category"> Informations des equipes </p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -22,6 +76,9 @@
                                     <th>
                                         Niveau
                                     </th>
+                                    <th>
+                                        Action
+                                    </th>
                                   
                                 </thead>
                                 <tbody>
@@ -35,7 +92,23 @@
                                         <td>
                                             {{e.niveau}}
                                         </td>
-                            
+                                        <td>
+                                            <div class="example-button-row">
+                                                <div class="example-flex-container">
+                                                  <div class="example-button-container">
+                                                    <button mat-fab color="red" (click)="deleteEquipe(e.idEquipe)">
+                                                      <mat-icon>delete</mat-icon>
+                                                    </button>
+                                                    <button mat-fab color="green" >
+                                                        <mat-icon>create</mat-icon>
+                                                      </button>
+                                                      <button mat-fab color="primary" >
+                                                        <mat-icon>visibility</mat-icon>
+                                                      </button>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         
                                     </tr>
                                     
@@ -50,4 +123,4 @@
         </div>
     </div>
   </div>
-  
+  <!--end table-->

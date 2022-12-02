@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Equipe } from 'app/core/models/equipe';
 import { EquipeService } from 'app/core/services/equipe/equipe.service';
 
@@ -10,11 +11,20 @@ import { EquipeService } from 'app/core/services/equipe/equipe.service';
 export class ManageEquipesComponent {
 
    listEquipes:Equipe[] = [];
-   constructor(private EquipeS : EquipeService){
+   registerform: FormGroup;
+
+   constructor(private EquipeS : EquipeService,private formBuilder : FormBuilder,){
     
    }
    ngOnInit(): void {
      this.getlistEquipes();
+
+     this.registerform = this.formBuilder.group({
+      nom : ['',[Validators.required, ]],
+      niveau : ['', Validators.required],
+
+    });
+     
    }
  
    getlistEquipes(){
@@ -25,5 +35,23 @@ export class ManageEquipesComponent {
      });
      
     }
+
+
+     deleteEquipe(e){
+      this.EquipeS.deleteEquipe(e).subscribe(data =>{
+      location.reload();
+    }
+  
+    )}
+
+    register(){
+
+      this.EquipeS.createEquipe({body:{ 
+        'nom': this.registerform.controls['nom'].value ,
+        'niveau':this.registerform.controls['niveau'].value,
+      }}) 
+  
+    }
+ 
 
 }

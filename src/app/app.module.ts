@@ -11,6 +11,7 @@ import { ManageEtudiantsComponent } from './manage-etudiants/manage-etudiants.co
 import { ManageUniversitiesComponent } from './manage-universities/manage-universities.component';
 import { ManageContractsComponent } from './manage-contracts/manage-contracts.component';
 import { ManageEquipesComponent } from './manage-equipes/manage-equipes.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ManageEquipesComponent } from './manage-equipes/manage-equipes.componen
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatInputModule
   ],
   declarations: [
     AppComponent,
