@@ -1,8 +1,9 @@
 
 <div class="main-content">
     <div class="container-fluid">
+        <div></div>
         <app-create-etudiant [listEtudiants]="listEtudiants" *ngIf="createMode"></app-create-etudiant>
-        <app-update-etudiant (requested)=etudiantUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listEtudiants]="listEtudiants" [selectedEtudiant]="selectedEtudiant" *ngIf="updateMode"></app-update-etudiant>
+        <app-update-etudiant (requested)=etudiantUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listEtudiants]="listEtudiants" [selectedEtudiant]="selectedEtudiant"  *ngIf="updateMode"></app-update-etudiant>
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-plain">
