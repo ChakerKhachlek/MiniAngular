@@ -1,8 +1,23 @@
 
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <p>manage-contracts works!</p>
-            </div>
-            </div>
-            </div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Specialite</th>
+            <th>Archive</th>
+            <th>Montant</th>
+            <th>dateDebutContrat</th>
+            <th>dateFinContrat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let contrat of listContrats">
+            <td>{{contrat.id}}</td>
+            <td>{{contrat.specialite}}</td>
+            <td>{{contrat.archive}}</td>
+            <td>{{contrat.montant}}</td>
+            <td>{{contrat.dateDebutContrat}}</td>
+            <td>{{contrat.dateFinContrat}}</td>
+        </tr>
+    </tbody>
+</table>
