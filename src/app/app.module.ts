@@ -11,8 +11,13 @@ import { ManageEtudiantsComponent } from './manage-etudiants/manage-etudiants.co
 import { ManageUniversitiesComponent } from './manage-universities/manage-universities.component';
 import { ManageContractsComponent } from './manage-contracts/manage-contracts.component';
 import { ManageEquipesComponent } from './manage-equipes/manage-equipes.component';
+
+import { CreateEtudiantComponent } from './manage-etudiants/create-etudiant/create-etudiant.component';
+import { UpdateEtudiantComponent } from './manage-etudiants/update-etudiant/update-etudiant.component';
+
 import { ManageDepartmentsComponent } from './manage-departments/manage-departments.component';
 import { AddDepartmentComponent } from './manage-departments/create-departments/add-department/add-department.component';
+
 
 @NgModule({
   imports: [
@@ -31,8 +36,13 @@ import { AddDepartmentComponent } from './manage-departments/create-departments/
     ManageUniversitiesComponent,
     ManageContractsComponent,
     ManageEquipesComponent,
+
+    CreateEtudiantComponent,
+    UpdateEtudiantComponent,
+
     ManageDepartmentsComponent,
     AddDepartmentComponent,
+
 
   ],
   providers: [],
