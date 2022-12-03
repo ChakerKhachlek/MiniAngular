@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Equipe } from 'app/core/models/equipe';
 import { EquipeService } from 'app/core/services/equipe/equipe.service';
 
@@ -11,26 +11,28 @@ import { EquipeService } from 'app/core/services/equipe/equipe.service';
 export class ManageEquipesComponent {
 
    listEquipes:Equipe[] = [];
-   registerform: FormGroup;
 
-   constructor(private EquipeS : EquipeService,private formBuilder : FormBuilder,){
+   constructor(private EquipeS : EquipeService,private fb : FormBuilder,){
     
    }
+
+   reactiveForm = this.fb.group({
+    nom:['', [Validators.required, Validators.minLength(3)]],
+    niveau: [''],
+ 
+    });
+
+    
    ngOnInit(): void {
      this.getlistEquipes();
 
-     this.registerform = this.formBuilder.group({
-      nom : ['',[Validators.required, ]],
-      niveau : ['', Validators.required],
-
-    });
      
    }
  
    getlistEquipes(){
      this.EquipeS.getAllEquipes().subscribe(data => {
        this.listEquipes= data;
-       console.log(data);
+       console.log("data :",data);
        
      });
      
@@ -44,14 +46,15 @@ export class ManageEquipesComponent {
   
     )}
 
-    register(){
-
-      this.EquipeS.createEquipe({body:{ 
-        'nom': this.registerform.controls['nom'].value ,
-        'niveau':this.registerform.controls['niveau'].value,
-      }}) 
+    Save(){
+      console.log(this.reactiveForm);
+      let equipe = this.reactiveForm.getRawValue();
+      console.log("equipe = ", equipe);
   
     }
  
+
+
+
 
 }

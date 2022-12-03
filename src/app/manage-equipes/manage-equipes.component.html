@@ -11,23 +11,30 @@
                     <div class="card-body">
                         <form [formGroup]="registerform" (ngSubmit)="register()">
                             <div class="row">
+                
                                 <div class="col-md-7">
+                                    <div class="form-group">
+
                                   <mat-form-field class="example-full-width">
                                       <input matInput placeholder="Nom" formControlName="nom" required>
                                     </mat-form-field>
                                 </div>
+                                </div>
                                 <div class="col-md-5">
+                                    <div class="form-group">
+
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Niveau</mat-label>
-                                        <select matNativeControl required>
+                                        <select matNativeControl formControlName="niveau" required>
                                             <option value="EXPERT">EXPERT</option>
                                             <option value="SENIOR">SENIOR</option>
                                             <option value="JUNIOR">JUNIOR</option>
                                         </select>                                   
                                      </mat-form-field>
+                                     </div>
                                 </div>
                                 
-                            </div>
+                            </div><!--
                             <div class="row">
                                 <div class="col-md-8">
                                   <mat-form-field class="example-full-width">
@@ -40,8 +47,8 @@
                                     </mat-form-field>
                                 </div>
                                 
-                           </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter</button>
+                           </div>-->
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter Equipe</button>
                         </form>
                     </div>
                 </div>

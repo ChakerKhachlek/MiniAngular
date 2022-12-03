@@ -10,19 +10,19 @@ export class EquipeService {
 
   constructor( private http: HttpClient ) { }
   //URL du Backend
-  url = "http://localhost:8089/kaddem/api/equipe/";
+  url = "http://localhost:8089/kaddem/equipe/";
 
   
   getAllEquipes(){
    return this.http.get<Equipe[]>(this.url+"retrieve-all-equipes");
   }
 
-  createEquipe(Equipe: any): Observable<object> {  
+  createEquipe(Equipe: any) {  
     return this.http.post(`${this.url}`+'add-equipe', Equipe);  
   } 
 
   
-  updateEquipe(details: any): Observable<Object> {
+  updateEquipe(details: any) {
     return this.http.put(`${this.url}`+'update-equipe', details);
   }
 
