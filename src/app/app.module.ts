@@ -28,6 +28,7 @@ import { AddDepartmentComponent } from './manage-departments/create-departments/
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+
   ],
   declarations: [
     AppComponent,
