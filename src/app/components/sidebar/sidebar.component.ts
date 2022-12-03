@@ -13,6 +13,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/manage-universities', title: 'Manage Universities',  icon:'content_paste', class: '' },
     { path: '/manage-contracts', title: 'Manage Contracts',  icon:'library_books', class: '' },
     { path: '/manage-equipes', title: 'Manage Equipes',  icon:'bubble_chart', class: '' },
+    { path: '/manage-departments', title: 'Manage Departments',  icon:'bubble_chart', class: '' }
+
 
    
 ];

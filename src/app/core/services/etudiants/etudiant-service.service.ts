@@ -34,4 +34,5 @@ export class EtudiantServiceService {
   updateEtudiant(etudiant:Etudiant){
     return this.http.put<Etudiant>(this.url+'etudiant/update-etudiant', etudiant);
   }
+  
 }

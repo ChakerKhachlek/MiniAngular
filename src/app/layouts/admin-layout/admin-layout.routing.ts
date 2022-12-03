@@ -12,6 +12,7 @@ import { ManageEtudiantsComponent } from 'app/manage-etudiants/manage-etudiants.
 import { ManageUniversitiesComponent } from 'app/manage-universities/manage-universities.component';
 import { ManageContractsComponent } from 'app/manage-contracts/manage-contracts.component';
 import { ManageEquipesComponent } from 'app/manage-equipes/manage-equipes.component';
+import { ManageDepartmentsComponent } from 'app/manage-departments/manage-departments.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -62,5 +63,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'manage-universities',     component: ManageUniversitiesComponent },
     { path: 'manage-contracts',          component: ManageContractsComponent },
     { path: 'manage-equipes',           component: ManageEquipesComponent },
+    { path: 'manage-departments',           component: ManageDepartmentsComponent }
+
 
 ];

@@ -1,0 +1,55 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div></div>
+        <!-- <app-create-department [listDepartments]="listDepartments" *ngIf="createMode"></app-create-department> !-->
+       <!-- <app-update-department (requested)=departmentUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listDepartments]="listDepartments" [selectedDepartment]="selectedDepartment"  *ngIf="updateMode"></app-update-department> -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">List Departments</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    
+                                    <th> 
+                                        Edit/Delete
+                                    </th>
+                                </thead>
+                                <tbody  *ngFor="let department of listDepartments">
+                              
+                                    <tr>
+                                        <td>
+                                            {{ department.idDepart }}
+                                        </td>
+                                        <td>
+                                            {{ department.nomDepart }}
+                                        </td>
+                                         
+                                       <td>
+                                            <button (click)="updateModeActive(department)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
+                                            <button (click)="removeEtudiant(department)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
+                                        </td> 
+                                       
+                                    </tr>
+                                  
+                                
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!-- button class="btn btn-primary" (click)="goToAdmin()"> return to Dashboard </button !-->
+            </div>
