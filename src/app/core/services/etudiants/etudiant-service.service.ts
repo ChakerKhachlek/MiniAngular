@@ -18,4 +18,5 @@ export class EtudiantServiceService {
   getAllEtudiants(){
    return this.http.get<Etudiant[]>(this.url);
   }
+  
 }
