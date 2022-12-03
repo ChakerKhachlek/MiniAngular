@@ -64,7 +64,7 @@
                    
                  
                     <small style="color: red;"
-                    *ngIf="!reactiveForm.valid">
+                    *ngIf="!reactiveForm.valid && reactiveForm.get('option')?.touched && reactiveForm.get('nom')?.touched && reactiveForm.get('prenom')?.touched">
                     Verify inputs.
                   </small>
                     <button  type="submit" class="btn btn-danger pull-right">Update Etudiant</button>
