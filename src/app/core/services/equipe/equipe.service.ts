@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DetailsEquipe } from 'app/core/models/detailsEquipe';
 import { Equipe } from 'app/core/models/equipe';
 import { Observable } from 'rxjs';
+import { DetailEquipeService } from './detail-equipe.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,12 @@ export class EquipeService {
    return this.http.get<Equipe[]>(this.url+"retrieve-all-equipes");
   }
 
-  createEquipe(Equipe: any) {  
+  createEquipe(Equipe: Equipe) {  
     return this.http.post(`${this.url}`+'add-equipe', Equipe);  
+  } 
+
+  createEquipeDet(Equipe: Equipe, Det: DetailsEquipe ){  
+    return this.http.post(`${this.url}`+'add-equipe-detail', {Equipe,Det} ) ;  
   } 
 
   

@@ -9,7 +9,7 @@
                         <p class="card-category">Veuillez saisir les informations de l'équipe</p>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="registerform" (ngSubmit)="register()">
+                        <form [formGroup]="reactiveForm" (ngSubmit)="addEquipe()">
                             <div class="row">
                 
                                 <div class="col-md-7">
@@ -34,7 +34,7 @@
                                      </div>
                                 </div>
                                 
-                            </div><!--
+                            </div>
                             <div class="row">
                                 <div class="col-md-8">
                                   <mat-form-field class="example-full-width">
@@ -47,7 +47,7 @@
                                     </mat-form-field>
                                 </div>
                                 
-                           </div>-->
+                           </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter Equipe</button>
                         </form>
                     </div>
@@ -55,14 +55,14 @@
             </div>
    
         </div>
-    </div>
-  </div>
+  
+  
 <!--end form-->  
 <!--table-->
 
 
-<div class="main-content">
-    <div class="container-fluid">
+
+   
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -100,22 +100,13 @@
                                             {{e.niveau}}
                                         </td>
                                         <td>
-                                            <div class="example-button-row">
-                                                <div class="example-flex-container">
-                                                  <div class="example-button-container">
-                                                    <button mat-fab color="red" (click)="deleteEquipe(e.idEquipe)">
-                                                      <mat-icon>delete</mat-icon>
-                                                    </button>
-                                                    <button mat-fab color="green" >
-                                                        <mat-icon>create</mat-icon>
-                                                      </button>
-                                                      <button mat-fab color="primary" >
-                                                        <mat-icon>visibility</mat-icon>
-                                                      </button>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                        </td>
+                                           
+
+                                            <td>
+                                                <button (click)="updateModeActive(equipe)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
+                                                <button (click)="deleteEquipe(e.idEquipe)" class="btn btn-sm btn-danger ">Delete <i class="material-icons ">delete</i></button>
+                                            </td>
+                                        
                                         
                                     </tr>
                                     

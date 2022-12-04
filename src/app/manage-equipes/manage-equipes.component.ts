@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray,FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DetailsEquipe } from 'app/core/models/detailsEquipe';
 import { Equipe } from 'app/core/models/equipe';
 import { EquipeService } from 'app/core/services/equipe/equipe.service';
 
@@ -9,6 +10,7 @@ import { EquipeService } from 'app/core/services/equipe/equipe.service';
   styleUrls: ['./manage-equipes.component.scss']
 })
 export class ManageEquipesComponent {
+  @Input() selectedEquipe:Equipe ;
 
    listEquipes:Equipe[] = [];
 
@@ -18,7 +20,11 @@ export class ManageEquipesComponent {
 
    reactiveForm = this.fb.group({
     nom:['', [Validators.required, Validators.minLength(3)]],
-    niveau: [''],
+    niveau: ['',[Validators.required]],
+    thematique: ['',[Validators.required, Validators.minLength(3)]],
+    salle: ['',[Validators.required, Validators.min(1)]],
+    
+ 
  
     });
 
@@ -46,15 +52,54 @@ export class ManageEquipesComponent {
   
     )}
 
-    Save(){
-      console.log(this.reactiveForm);
-      let equipe = this.reactiveForm.getRawValue();
-      console.log("equipe = ", equipe);
-  
+
+
+    addEquipe(){
+      let equipe=new Equipe();
+      let equipeD=new DetailsEquipe();
+
+      if(this.reactiveForm.valid){
+        equipe.nomEquipe= this.reactiveForm.get('nom').value;
+        equipe.niveau = this.reactiveForm.get('niveau').value;
+        equipeD.salle =  +this.reactiveForm.get('salle').value;
+        equipeD.thematique = this.reactiveForm.get('thematique').value;
+        
+       
+    
+        console.log(equipeD,equipe);
+        //this.EquipeS.createEquipe(equipe).subscribe(equipe => this.listEquipes.push(equipe as Equipe));
+        this.EquipeS.createEquipeDet(equipe,equipeD).subscribe(equipe => 
+          this.listEquipes.push(equipe  as Equipe));
+      }
+       
+      window.location.reload();
+
     }
+
+    updateEtudiant(){
+      if(this.reactiveForm.valid){
+        let newEquipe=new Equipe();
+   
+        newEquipe.nomEquipe = this.reactiveForm.get('nom').value;
+        newEquipe.niveau = this.reactiveForm.get('niveau').value;
+    
+        newEquipe.idEquipe=this.selectedEquipe.idEquipe;
+    
+        this.EquipeS.updateEquipe(newEquipe).subscribe(function(selectedEquipe,newEquipe) {
+
+          this.updateElementFromArray(selectedEquipe,newEquipe as Equipe);
+        
+          this.requested.emit(newEquipe);
+          console.log(this.updateMode,this.createMode);
+        }.bind(this,this.selectedEquipe) );
+        
+      }
+    }
+  }
  
 
 
 
 
-}
+
+      
