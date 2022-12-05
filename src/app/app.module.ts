@@ -45,7 +45,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
     ManageDepartmentsComponent,
     AddDepartmentComponent,
-    LandingPageComponent,
+
 
 
   ],

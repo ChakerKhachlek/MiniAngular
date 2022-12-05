@@ -17,7 +17,7 @@ const routes: Routes =[
     component:LandingPageComponent
   }
   ,{
-    path: 'dashboard',
+    path: '',
     component: AdminLayoutComponent,
     children: [{
       path: '',
