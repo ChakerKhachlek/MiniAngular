@@ -63,18 +63,17 @@ export class ManageEquipesComponent {
         equipe.niveau = this.reactiveForm.get('niveau').value;
         equipeD.salle =  +this.reactiveForm.get('salle').value;
         equipeD.thematique = this.reactiveForm.get('thematique').value;
-        
+        equipe.detailEquipe = equipeD;
        
     
-        console.log(equipeD,equipe);
-        //this.EquipeS.createEquipe(equipe).subscribe(equipe => this.listEquipes.push(equipe as Equipe));
-        this.EquipeS.createEquipeDet(equipe,equipeD).subscribe(equipe => 
-          this.listEquipes.push(equipe  as Equipe));
-      }
+        console.log("XXX",equipeD,equipe);
+        this.EquipeS.createEquipe(equipe).subscribe(equipe => this.listEquipes.push(equipe as Equipe));
+    
        
       window.location.reload();
 
     }
+  }
 
     updateEtudiant(){
       if(this.reactiveForm.valid){
