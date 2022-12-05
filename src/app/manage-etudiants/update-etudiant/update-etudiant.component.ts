@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Etudiant } from 'app/core/models/etudiant';
 import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-service.service';
+import { NotificationServiceService } from 'app/core/services/notification-service.service';
 
 @Component({
   selector: 'app-update-etudiant',
@@ -16,7 +17,7 @@ export class UpdateEtudiantComponent implements OnInit{
   @Input()  updateMode : boolean;
   @Output() requested = new EventEmitter<Etudiant>();
   
-  constructor(private fb:FormBuilder, private etudiantService: EtudiantServiceService){}
+  constructor(private fb:FormBuilder, private etudiantService: EtudiantServiceService,private notification :NotificationServiceService){}
  
 
  
@@ -47,6 +48,7 @@ export class UpdateEtudiantComponent implements OnInit{
         this.updateElementFromArray(selectedEtudiant,newEtudiant as Etudiant);
       
         this.requested.emit(newEtudiant);
+        this.notification.showNotification('top','right','Etudiant updated !','warning');
         console.log(this.updateMode,this.createMode);
       }.bind(this,this.selectedEtudiant) );
       
