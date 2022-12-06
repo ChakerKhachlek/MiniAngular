@@ -12,6 +12,7 @@ import { ManageEtudiantsComponent } from 'app/manage-etudiants/manage-etudiants.
 import { ManageUniversitiesComponent } from 'app/manage-universities/manage-universities.component';
 import { ManageEquipesComponent } from 'app/manage-equipes/manage-equipes.component';
 import { ManageDepartmentsComponent } from 'app/manage-departments/manage-departments.component';
+import { ManageContratsModule } from '../../manage-contrats/manage-contrats.module';
 
 export const AdminLayoutRoutes: Routes = [
     // {
