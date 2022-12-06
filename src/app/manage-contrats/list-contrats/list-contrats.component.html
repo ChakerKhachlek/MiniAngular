@@ -52,15 +52,22 @@
                                     <th>
                                         DateFinContrat
                                     </th>
+                                    <th>
+                                        Action
+                                    </th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let contrat of listContrats">
-                                        <td>{{contrat.id}}</td>
+                                        <td>{{contrat.idContrat}}</td>
                                         <td>{{contrat.specialite}}</td>
                                         <td>{{contrat.archive}}</td>
                                         <td>{{contrat.montantContrat}}</td>
                                         <td>{{contrat.dateDebutContrat}}</td>
                                         <td>{{contrat.dateFinContrat}}</td>
+                                        <td>
+                                            <button (click)="updateContrat(contrat)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
+                                            <button (click)="removeContrat(contrat.idContrat)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

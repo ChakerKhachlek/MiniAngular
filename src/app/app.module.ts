@@ -13,9 +13,11 @@ import { ManageContractsComponent } from './manage-contracts/manage-contracts.co
 import { ManageEquipesComponent } from './manage-equipes/manage-equipes.component';
 import { CreateEtudiantComponent } from './manage-etudiants/create-etudiant/create-etudiant.component';
 import { UpdateEtudiantComponent } from './manage-etudiants/update-etudiant/update-etudiant.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  imports: [
+  imports: [ 
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -23,6 +25,8 @@ import { UpdateEtudiantComponent } from './manage-etudiants/update-etudiant/upda
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   declarations: [
     AppComponent,
@@ -33,7 +37,7 @@ import { UpdateEtudiantComponent } from './manage-etudiants/update-etudiant/upda
     ManageEquipesComponent,
     CreateEtudiantComponent,
     UpdateEtudiantComponent,
-
+    
 
   ],
   providers: [],
