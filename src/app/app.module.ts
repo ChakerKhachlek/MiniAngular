@@ -11,10 +11,16 @@ import { ManageEtudiantsComponent } from './manage-etudiants/manage-etudiants.co
 import { ManageUniversitiesComponent } from './manage-universities/manage-universities.component';
 import { ManageContractsComponent } from './manage-contracts/manage-contracts.component';
 import { ManageEquipesComponent } from './manage-equipes/manage-equipes.component';
+import {MatInputModule} from '@angular/material/input';
+
 import { CreateEtudiantComponent } from './manage-etudiants/create-etudiant/create-etudiant.component';
 import { UpdateEtudiantComponent } from './manage-etudiants/update-etudiant/update-etudiant.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+
+import { ManageDepartmentsComponent } from './manage-departments/manage-departments.component';
+import { AddDepartmentComponent } from './manage-departments/create-departments/add-department/add-department.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 @NgModule({
   imports: [ 
@@ -27,6 +33,7 @@ import { MatInputModule } from '@angular/material/input';
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
+    MatInputModule
   ],
   declarations: [
     AppComponent,
@@ -35,9 +42,14 @@ import { MatInputModule } from '@angular/material/input';
     ManageUniversitiesComponent,
     ManageContractsComponent,
     ManageEquipesComponent,
+
     CreateEtudiantComponent,
     UpdateEtudiantComponent,
-    
+
+    ManageDepartmentsComponent,
+    AddDepartmentComponent,
+
+
 
   ],
   providers: [],

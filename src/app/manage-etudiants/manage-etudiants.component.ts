@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Etudiant } from 'app/core/models/etudiant';
 import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-service.service';
+import { NotificationServiceService } from 'app/core/services/notification-service.service';
 import { data } from 'jquery';
 
 @Component({
@@ -17,7 +18,7 @@ export class ManageEtudiantsComponent {
    listEtudiants:Etudiant[] ;
   selectedEtudiant: Etudiant;
 
-  constructor( private route:Router,private etudiantService : EtudiantServiceService){
+  constructor( private route:Router,private etudiantService : EtudiantServiceService,private notification : NotificationServiceService){
    this.listEtudiants=[];
   }
   ngOnInit(): void {
@@ -39,6 +40,7 @@ export class ManageEtudiantsComponent {
     this.etudiantService.deleteEtudiant(etudiant.id).subscribe(function(etudiant,data) {
       console.log(data);
       this.removeElementFromArray(etudiant);
+      this.notification.showNotification('top','right','Etudiant deleted !','danger');
       }.bind(this,etudiant));
     
    }

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Etudiant } from 'app/core/models/etudiant';
 import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-service.service';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { NotificationServiceService } from 'app/core/services/notification-service.service';
 
 @Component({
   selector: 'app-create-etudiant',
@@ -11,7 +13,8 @@ import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-ser
 })
 export class CreateEtudiantComponent {
 
-  constructor(private fb:FormBuilder, private etudiantService: EtudiantServiceService){}
+  constructor(private fb:FormBuilder, private etudiantService: EtudiantServiceService,private notification :NotificationServiceService,
+    private matSnackBar: MatSnackBar){}
   @Input() listEtudiants:Etudiant[] ;
  
   reactiveForm = this.fb.group({
@@ -27,12 +30,15 @@ export class CreateEtudiantComponent {
       etudiant.prenom = this.reactiveForm.get('prenom').value;
       etudiant.option = this.reactiveForm.get('option').value;
      
-  
-      this.etudiantService.addEtudiant(etudiant).subscribe(etudiant => this.listEtudiants.push(etudiant as Etudiant));
+
+      this.etudiantService.addEtudiant(etudiant).subscribe(etudiant=> {
+        this.listEtudiants.push(etudiant as Etudiant);
+        this.notification.showNotification('top','right','Etudiant added !','success');
+      } );
       
     }
      
     
   }
-
+  
 }

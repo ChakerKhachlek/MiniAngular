@@ -11,7 +11,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ManageEtudiantsComponent } from 'app/manage-etudiants/manage-etudiants.component';
 import { ManageUniversitiesComponent } from 'app/manage-universities/manage-universities.component';
 import { ManageEquipesComponent } from 'app/manage-equipes/manage-equipes.component';
-import { ManageContratsModule } from 'app/manage-contrats/manage-contrats.module';
+import { ManageDepartmentsComponent } from 'app/manage-departments/manage-departments.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
