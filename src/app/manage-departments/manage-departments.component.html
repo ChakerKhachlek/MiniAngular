@@ -1,8 +1,8 @@
 <div class="main-content">
     <div class="container-fluid">
         <div></div>
-        <!-- <app-create-department [listDepartments]="listDepartments" *ngIf="createMode"></app-create-department> !-->
-       <!-- <app-update-department (requested)=departmentUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listDepartments]="listDepartments" [selectedDepartment]="selectedDepartment"  *ngIf="updateMode"></app-update-department> -->
+         <app-add-department [listDepartments]="listDepartments" *ngIf="createMode"></app-add-department> 
+        <app-update-department (requested)=departmentUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listDepartments]="listDepartments" [selectedDepartment]="selectedDepartment"  *ngIf="updateMode"></app-update-department> 
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-plain">
@@ -36,7 +36,7 @@
                                          
                                        <td>
                                             <button (click)="updateModeActive(department)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
-                                            <button (click)="removeEtudiant(department)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
+                                            <button (click)="deleteDepartment(department)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
                                         </td> 
                                        
                                     </tr>
