@@ -22,6 +22,11 @@ export class DepartmentServiceService {
    deleteDepartment(id:Number){
     return this.http.delete(this.url+'remove-department/'+id);
   }
+  updateDepartment(departement : Department){
+   
+      return this.http.put<Department>(this.url+'update-department', departement);
+    
+  }
    
    
 }

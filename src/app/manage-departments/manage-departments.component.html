@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div></div>
          <app-add-department [listDepartments]="listDepartments" *ngIf="createMode"></app-add-department> 
-       <!-- <app-update-department (requested)=departmentUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listDepartments]="listDepartments" [selectedDepartment]="selectedDepartment"  *ngIf="updateMode"></app-update-department> -->
+        <app-update-department (requested)=departmentUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listDepartments]="listDepartments" [selectedDepartment]="selectedDepartment"  *ngIf="updateMode"></app-update-department> 
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-plain">

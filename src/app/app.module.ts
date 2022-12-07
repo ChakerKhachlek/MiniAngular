@@ -17,6 +17,7 @@ import { UpdateEtudiantComponent } from './manage-etudiants/update-etudiant/upda
 
 import { ManageDepartmentsComponent } from './manage-departments/manage-departments.component';
 import { AddDepartmentComponent } from './manage-departments/create-departments/add-department/add-department.component';
+import { UpdateDepartmentComponent } from './manage-departments/update-department/update-department.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AddDepartmentComponent } from './manage-departments/create-departments/
 
     ManageDepartmentsComponent,
     AddDepartmentComponent,
+    UpdateDepartmentComponent,
 
 
   ],

@@ -11,10 +11,10 @@ import { Router } from 'express';
 export class ManageDepartmentsComponent implements OnInit {
   listDepartments:Department[] = [];
   createMode : boolean ;
-  //updateMode : boolean ;
+  updateMode : boolean ;
 
    listdepartment:Department[] ;
- // selectedDepartment: Department;
+ selectedDepartment: Department;
 
   
 
@@ -49,7 +49,18 @@ deleteDepartment(dep:Department){
       if(value==element) this.listDepartments.splice(index,1);
   });}
 
-
+  updateModeActive(departement :Department){
+    this.selectedDepartment=departement;
+    this.createMode=false;
+    this.updateMode=true;
+   
+  }
+  
+  departmentUpdated(departement :Department){
+    this.updateMode=false;
+    this.createMode=true;
+  
+  }
 }
 
 
