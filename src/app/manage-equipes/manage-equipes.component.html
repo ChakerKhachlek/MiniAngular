@@ -1,8 +1,137 @@
-
+<!-- form-->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <p>manage-equipes works!</p>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Ajouter Equipe</h4>
+                        <p class="card-category">Veuillez saisir les informations de l'équipe</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="reactiveForm" (ngSubmit)="addEquipe()">
+                            <div class="row">
+                
+                                <div class="col-md-7">
+                                    <div class="form-group">
+
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Nom" formControlName="nom" required>
+                                    </mat-form-field>
+                                </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Niveau</mat-label>
+                                        <select matNativeControl formControlName="niveau" required>
+                                            <option value="EXPERT">EXPERT</option>
+                                            <option value="SENIOR">SENIOR</option>
+                                            <option value="JUNIOR">JUNIOR</option>
+                                        </select>                                   
+                                     </mat-form-field>
+                                     </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Thematique" type="text" formControlName="thematique" required>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Salle" type="number" formControlName="salle"  required>
+                                    </mat-form-field>
+                                </div>
+                                
+                           </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter Equipe</button>
+                        </form>
+                    </div>
+                </div>
             </div>
+   
+        </div>
+  
+  
+<!--end form-->  
+<!--table-->
+
+
+
+   
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Equipes</h4>
+                        <p class="card-category"> Informations des equipes </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    <th>
+                                        Niveau
+                                    </th>
+                                    <th>
+                                        Thematique
+                                    </th>
+                                    <th>
+                                        Salle
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                  
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let e of listEquipes">
+                                        <td>
+                                            {{e.idEquipe}}
+                                        </td>
+                                        <td>
+                                            {{e.nomEquipe}}
+                                        </td>
+                                        <td>
+                                            {{e.niveau}}
+                                        </td>
+                                        <td>
+                                            {{e.detailEquipe.thematique}}
+
+                                        </td>
+                                        <td>
+                                            {{e.detailEquipe.salle}}
+                                        </td>
+                                        
+                                           
+
+                                            <td>
+                                                <button (click)="updateModeActive(equipe)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
+                                                <button (click)="deleteEquipe(e.idEquipe)" class="btn btn-sm btn-danger ">Delete <i class="material-icons ">delete</i></button>
+                                            </td>
+                                        
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
+            
+
+        </div>
+    </div>
+  </div>
+  <!--end table-->
