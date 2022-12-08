@@ -9,6 +9,7 @@ import { ContratServiceService } from 'app/core/services/contrats/contrat-servic
   styleUrls: ['./add-contrat.component.scss']
 })
 export class AddContratComponent {
+  create!: boolean;
   constructor(private fb:FormBuilder, private ContratService: ContratServiceService){}
   @Input() listContrats:Contrat[] ;
  
@@ -23,16 +24,22 @@ export class AddContratComponent {
   addContrat(){
    let contrat=new Contrat();
     if(this.reactiveForm.valid){
-      /*contrat.nom = this.reactiveForm.get('nom').value;
-      contrat.prenom = this.reactiveForm.get('prenom').value;
-      contrat.option = this.reactiveForm.get('option').value;*/
-     
-  
-      this.ContratService.addContrat(contrat).subscribe(Contrat => this.listContrats.push(Contrat as Contrat));
-      
+      contrat.archive= Boolean(this.reactiveForm.get('archive').value);
+      contrat.montantContrat=Number(this.reactiveForm.get('montant').value);
+      contrat.specialite=this.reactiveForm.get('specialite').value;
+      contrat.dateDebutContrat=new Date(this.reactiveForm.get('dateDebutContrat').value);
+      contrat.dateFinContrat=new Date(this.reactiveForm.get('dateFinContrat').value);
+
+
+      this.ContratService.addContrat(contrat).subscribe(contrat => this.listContrats.push(contrat as Contrat));
+      window.location.reload();
+
     }
-     
+  
     
+  }
+  onNoClick(){
+    this.create=false;
   }
 
 }

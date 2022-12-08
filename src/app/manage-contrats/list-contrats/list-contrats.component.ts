@@ -27,9 +27,7 @@ export class ListContratsComponent {
       console.log(data);
     });
   }
-  AddContrat() {
-    this.contratService.addContrat(this.contrat);
-  }
+  
   updateContrat(contrat: Contrat) {
     let dialogRef = this.dialog.open(UpdateContratComponent, {
       height: '590px',

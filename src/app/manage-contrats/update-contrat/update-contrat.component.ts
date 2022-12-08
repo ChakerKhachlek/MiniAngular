@@ -26,5 +26,7 @@ export class UpdateContratComponent {
     dateDebutContrat: ['', [Validators.required]],
     dateFinContrat: ['', [Validators.required]],
   });
+  }
 
-}
+  
+
