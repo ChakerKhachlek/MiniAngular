@@ -19,7 +19,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ManageDepartmentsComponent } from './manage-departments/manage-departments.component';
 import { AddDepartmentComponent } from './manage-departments/create-departments/add-department/add-department.component';
+
+import { UpdateDepartmentComponent } from './manage-departments/update-department/update-department.component';
+
 import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 
 @NgModule({
@@ -48,6 +52,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
     ManageDepartmentsComponent,
     AddDepartmentComponent,
+    UpdateDepartmentComponent,
 
 
 
