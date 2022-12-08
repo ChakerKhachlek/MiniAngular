@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ManageEtudiantsComponent } from './manage-etudiants/manage-etudiants.component';
 import { ManageUniversitiesComponent } from './manage-universities/manage-universities.component';
-import { ManageContractsComponent } from './manage-contracts/manage-contracts.component';
 import { ManageEquipesComponent } from './manage-equipes/manage-equipes.component';
 import {MatInputModule} from '@angular/material/input';
 
@@ -23,6 +22,7 @@ import { AddDepartmentComponent } from './manage-departments/create-departments/
 import { UpdateDepartmentComponent } from './manage-departments/update-department/update-department.component';
 
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ManageContratsModule } from './manage-contrats/manage-contrats.module';
 
 
 
@@ -37,14 +37,15 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
-    MatInputModule
+    MatInputModule,
+    ManageContratsModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     ManageEtudiantsComponent,
     ManageUniversitiesComponent,
-    ManageContractsComponent,
+    
     ManageEquipesComponent,
 
     CreateEtudiantComponent,
