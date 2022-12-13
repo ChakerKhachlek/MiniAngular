@@ -24,12 +24,14 @@ export class UpdateEtudiantComponent implements OnInit{
   reactiveForm = this.fb.group({  
     nom:['', [Validators.required, Validators.minLength(3)]],
     prenom: ['', [Validators.required, Validators.minLength(3)]],
+    email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
     option: ['', [Validators.required]],
   });
 
   ngOnInit(): void {
     this.reactiveForm.get('nom').setValue(this.selectedEtudiant.nom);
     this.reactiveForm.get('prenom').setValue(this.selectedEtudiant.prenom);
+    this.reactiveForm.get('email').setValue(this.selectedEtudiant.email);
     this.reactiveForm.get('option').setValue(this.selectedEtudiant.option);
   }
 
@@ -39,6 +41,7 @@ export class UpdateEtudiantComponent implements OnInit{
  
       newEtudiant.nom = this.reactiveForm.get('nom').value;
       newEtudiant.prenom = this.reactiveForm.get('prenom').value;
+      newEtudiant.email = this.reactiveForm.get('email').value;
       newEtudiant.option = this.reactiveForm.get('option').value;
   
       newEtudiant.id=this.selectedEtudiant.id;
