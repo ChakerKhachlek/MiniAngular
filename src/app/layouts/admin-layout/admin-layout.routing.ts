@@ -61,9 +61,13 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'manage-etudiants',     component: ManageEtudiantsComponent },
     { path: 'manage-universities',     component: ManageUniversitiesComponent },
+    
+    { path: 'manage-equipes',           component: ManageEquipesComponent },
+    { path: 'manage-departments',           component: ManageDepartmentsComponent },
     {path:'manage-contrats',
     loadChildren:()=>import('../../manage-contrats/manage-contrats.module').then(m=>ManageContratsModule)
     },   
      { path: 'manage-equipes',           component: ManageEquipesComponent },
+
 
 ];
