@@ -7,15 +7,25 @@ import { Contrat } from 'app/core/models/contrat';
 })
 export class ContratServiceService {
 
-  contratsList: Contrat[]= [];
+  contratsList: Contrat[] = [];
 
 
-  constructor( private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
   //URL du Backend
-  url = "http://localhost:8089/kaddem/contrat/retrieve-all-contrats";
+  url = "http://localhost:8089/kaddem/contrat/";
 
-  
-  getAllContrats(){
-   return this.http.get<Contrat[]>(this.url);
+
+  getAllContrats() {
+    return this.http.get<Contrat[]>(this.url + "retrieve-all-contrats");
+  }
+  addContrat(contrat: Contrat) {
+    return this.http.post(this.url + "add-contrat", contrat)
+  }
+
+  updateContrat(contrat: Contrat) {
+    return this.http.put<Contrat>(this.url +'update-contrat', contrat);
+  }
+  deleteContrat(id:Number){
+    return this.http.delete(this.url+'remove-contrat/'+id);
   }
 }

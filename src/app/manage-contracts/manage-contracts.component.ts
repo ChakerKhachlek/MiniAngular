@@ -9,6 +9,7 @@ import { ContratServiceService } from 'app/core/services/contrats/contrat-servic
 })
 export class ManageContractsComponent {
   listContrats:Contrat[] = [];
+  contrat: Contrat;
   constructor(private ContratService : ContratServiceService){
    
   }
@@ -20,8 +21,9 @@ export class ManageContractsComponent {
     this.ContratService.getAllContrats().subscribe(data => {
       this.listContrats= data;
       console.log(data);
-      
     });
-    
    }
+  AddContrat(){
+    this.ContratService.addContrat(this.contrat);
+  }
 }
