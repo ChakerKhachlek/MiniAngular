@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contrat } from 'app/core/models/contrat';
 import { ContratServiceService } from 'app/core/services/contrats/contrat-service.service';
+import { NotificationServiceService } from 'app/core/services/notification-service.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-add-contrat',
@@ -10,9 +12,11 @@ import { ContratServiceService } from 'app/core/services/contrats/contrat-servic
 })
 export class AddContratComponent {
   create!: boolean;
-  constructor(private fb:FormBuilder, private ContratService: ContratServiceService){}
-  @Input() listContrats:Contrat[] ;
- 
+  @Output() createModeEvent = new EventEmitter<boolean>();
+
+  constructor(private fb: FormBuilder, private ContratService: ContratServiceService,private notification :NotificationServiceService) { }
+  @Input() listContrats: Contrat[];
+
   reactiveForm = this.fb.group({
     archive: ['', [Validators.required]],
     montant: ['', [Validators.required]],
@@ -23,28 +27,34 @@ export class AddContratComponent {
 
 
   dateLessThan(from: Date, to: Date) {
-   return (from>to)
+    return (from > to)
+  }
+
+  addContrat() {
+    let contrat = new Contrat();
+    if (this.reactiveForm.valid) {
+      contrat.archive = Boolean(this.reactiveForm.get('archive').value);
+      contrat.montantContrat = Number(this.reactiveForm.get('montant').value);
+      contrat.specialite = this.reactiveForm.get('specialite').value;
+      contrat.dateDebutContrat = new Date(this.reactiveForm.get('dateDebutContrat').value);
+      contrat.dateFinContrat = new Date(this.reactiveForm.get('dateFinContrat').value);
+
+      this.ContratService.addContrat(contrat).subscribe(contrat => {
+        this.listContrats.push(contrat as Contrat);
+        this.createModeEvent.emit(false);
+         this.notification.showNotification('top','right','Contrat added !','success');  
+          },error => this.notification.showNotification('top','right','Server Error, contrat is not added !','danger'))
+                
+         
+        
+
     }
 
-  addContrat(){
-   let contrat=new Contrat();
-    if(this.reactiveForm.valid){
-      contrat.archive= Boolean(this.reactiveForm.get('archive').value);
-      contrat.montantContrat=Number(this.reactiveForm.get('montant').value);
-      contrat.specialite=this.reactiveForm.get('specialite').value;
-      contrat.dateDebutContrat=new Date(this.reactiveForm.get('dateDebutContrat').value);
-      contrat.dateFinContrat=new Date(this.reactiveForm.get('dateFinContrat').value);
 
-
-      this.ContratService.addContrat(contrat).subscribe(contrat => this.listContrats.push(contrat as Contrat));
-      window.location.reload();
-
-    }
+  }
+  onNoClick() {
+    this.createModeEvent.emit(false)
+  }
   
-    
-  }
-  onNoClick(){
-    this.create=false;
-  }
 
 }

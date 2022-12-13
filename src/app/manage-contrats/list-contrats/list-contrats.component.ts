@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UpdateContratComponent } from '../update-contrat/update-contrat.component';
 import { MatDialog } from '@angular/material/dialog';
 import { data } from 'jquery';
+import { NotificationServiceService } from 'app/core/services/notification-service.service';
 
 @Component({
   selector: 'app-list-contrats',
@@ -12,9 +13,10 @@ import { data } from 'jquery';
   styleUrls: ['./list-contrats.component.scss']
 })
 export class ListContratsComponent {
+  createMode: boolean;
   listContrats: Contrat[] = [];
   contrat: Contrat;
-  constructor(private route: Router, private contratService: ContratServiceService, public dialog: MatDialog) {
+  constructor(private route: Router, private contratService: ContratServiceService, public dialog: MatDialog, private notification: NotificationServiceService) {
 
   }
   ngOnInit(): void {
@@ -27,27 +29,34 @@ export class ListContratsComponent {
       console.log(data);
     });
   }
-  
-  updateContrat(contrat: Contrat) {
+
+  uupdateContrat(contrat, Contrat) {
     let dialogRef = this.dialog.open(UpdateContratComponent, {
       height: '590px',
       width: '600px',
       data: structuredClone(contrat)
     });
     dialogRef.afterClosed().subscribe(result => {
-    this.contratService.updateContrat(result).subscribe(updatedContrat=>{
-      console.log(updatedContrat)
-       this.listContrats.forEach((value,index)=>{
-          if(value.idContrat===updatedContrat.idContrat) this.listContrats[index]=updatedContrat;
-      });
-      })
-     console.log('The dialog was closed',result);
-      console.log('The dialog was closed',this.listContrats);
-
+      this.contratService.updateContrat(result).subscribe(updatedContrat => {
+        console.log(updatedContrat);
+        this.listContrats.forEach((value, index) => {
+          if (value.idContrat === updatedContrat.idContrat)
+            this.listContrats[index] = updatedContrat;
+        });
+        this.notification.showNotification('top', 'right', 'contract updated !', 'success');
+      },error=>this.notification.showNotification('top','right','Server Error, contract is not updated !','danger'));
+      console.log('The dialog was closed', result);
+      console.log('The dialog was closed', this.listContrats);
     });
   }
-  removeContrat(idContrat:number){
-               this.contratService.deleteContrat(idContrat) .subscribe(data=>{console.log("Le contrat est supprimé")})     
+  removeContrat(idContrat: number) {
+    this.contratService.deleteContrat(idContrat).subscribe(data => {
+      console.log("Le contrat est supprimé");
+      window.location.reload()
+    })
+  }
+  toggleCreatEtudiantForm(toggle: boolean) {
+    this.createMode = toggle;
   }
 
 
