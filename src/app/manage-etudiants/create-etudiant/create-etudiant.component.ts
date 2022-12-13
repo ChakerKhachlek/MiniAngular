@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Etudiant } from 'app/core/models/etudiant';
 import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-service.service';
@@ -13,30 +13,31 @@ import { NotificationServiceService } from 'app/core/services/notification-servi
 })
 export class CreateEtudiantComponent {
 
-  constructor(private fb:FormBuilder, private etudiantService: EtudiantServiceService,private notification :NotificationServiceService,
+  constructor(private etudiantService: EtudiantServiceService,private notification :NotificationServiceService,
     private matSnackBar: MatSnackBar){}
   @Input() listEtudiants:Etudiant[] ;
- 
-  reactiveForm = this.fb.group({
-    nom:['', [Validators.required, Validators.minLength(3)]],
-    prenom: ['', [Validators.required, Validators.minLength(3)]],
-    option: ['', [Validators.required]],
-  });
+  @Input() etudiants:Etudiant[] ;
+    etudiant:Etudiant=new Etudiant();
+    @Output() requested = new EventEmitter<Etudiant>();
 
   addEtudiant(){
-    let etudiant=new Etudiant();
-    if(this.reactiveForm.valid){
-      etudiant.nom = this.reactiveForm.get('nom').value;
-      etudiant.prenom = this.reactiveForm.get('prenom').value;
-      etudiant.option = this.reactiveForm.get('option').value;
+    let newEtudiant=new Etudiant();
+  
+      newEtudiant.nom = this.etudiant.nom ;
+      newEtudiant.prenom = this.etudiant.prenom ;
+      newEtudiant.email = this.etudiant.email ;
+      newEtudiant.option = this.etudiant.option ;
      
 
-      this.etudiantService.addEtudiant(etudiant).subscribe(etudiant=> {
+      this.etudiantService.addEtudiant(newEtudiant).subscribe(etudiant=> {
         this.listEtudiants.push(etudiant as Etudiant);
+        this.etudiants.push(etudiant as Etudiant);
+        this.requested.emit(newEtudiant);
+        this.etudiant=new Etudiant();
         this.notification.showNotification('top','right','Etudiant added !','success');
       } );
       
-    }
+    
      
     
   }

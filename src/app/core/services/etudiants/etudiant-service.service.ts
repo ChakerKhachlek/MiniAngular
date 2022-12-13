@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Etudiant } from '../../models/etudiant';
+ 
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,13 @@ export class EtudiantServiceService {
 
   updateEtudiant(etudiant:Etudiant){
     return this.http.put<Etudiant>(this.url+'etudiant/update-etudiant', etudiant);
+  }
+
+  sendEmailToEtudiant(id:Number,message:string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("message",message);
+
+    return this.http.get<Etudiant>(this.url+'etudiant/notifieretudiant/'+id,{params:queryParams});
   }
   
 }

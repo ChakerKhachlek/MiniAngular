@@ -19,7 +19,7 @@
                               <small style="color: red;"
                                 *ngIf="reactiveForm.get('nom')?.errors?.['minlength'] &&
                                 reactiveForm.get('nom')?.touched">
-                                Prenom at least 3 caracters
+                                Nom at least 3 caracters
                               </small>
                                 </div>
                         </div>
@@ -40,8 +40,24 @@
 
 
                         </div>
-                      
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <input class="form-control" placeholder="Email" formControlName="email">
+                              <small style="color: red;"
+                              *ngIf="reactiveForm.get('email')?.errors?.['required'] &&
+                              reactiveForm.get('email')?.touched">
+                              Email is required
+                            </small>
+                            <small style="color: red;"
+                              *ngIf="reactiveForm.get('email')?.errors?.['pattern'] &&
+                              reactiveForm.get('email')?.touched">
+                              Email must be valid
+                            </small>
+                              </div>
 
+
+                      </div>
+                        
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label >Option</label>

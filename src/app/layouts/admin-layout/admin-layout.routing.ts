@@ -63,7 +63,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'manage-universities',     component: ManageUniversitiesComponent },
     { path: 'manage-contracts',          component: ManageContractsComponent },
     { path: 'manage-equipes',           component: ManageEquipesComponent },
-    { path: 'manage-departments',           component: ManageDepartmentsComponent }
+    { path: 'manage-departments',           component: ManageDepartmentsComponent },
 
 
 ];

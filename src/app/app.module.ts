@@ -20,8 +20,9 @@ import { ManageDepartmentsComponent } from './manage-departments/manage-departme
 import { AddDepartmentComponent } from './manage-departments/create-departments/add-department/add-department.component';
 
 import { UpdateDepartmentComponent } from './manage-departments/update-department/update-department.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
-import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 
 
@@ -50,6 +51,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     ManageDepartmentsComponent,
     AddDepartmentComponent,
     UpdateDepartmentComponent,
+    SearchFilterPipe
+ 
 
 
 
