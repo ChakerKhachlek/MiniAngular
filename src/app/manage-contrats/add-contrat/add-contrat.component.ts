@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contrat } from 'app/core/models/contrat';
 import { ContratServiceService } from 'app/core/services/contrats/contrat-service.service';
 
@@ -20,6 +20,11 @@ export class AddContratComponent {
     dateDebutContrat: ['', [Validators.required]],
     dateFinContrat: ['', [Validators.required]],
   });
+
+
+  dateLessThan(from: Date, to: Date) {
+   return (from>to)
+    }
 
   addContrat(){
    let contrat=new Contrat();
