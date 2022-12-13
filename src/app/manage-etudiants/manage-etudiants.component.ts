@@ -111,7 +111,7 @@ export class ManageEtudiantsComponent {
 
     search(value: string): void {
       this.etudiants = this.listEtudiants.filter((val) =>
-        val.nom.toLowerCase().includes(value)
+        val.email.toLowerCase().includes(value) 
       );
     }
 }
