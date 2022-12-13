@@ -22,7 +22,6 @@ import { AddDepartmentComponent } from './manage-departments/create-departments/
 import { UpdateDepartmentComponent } from './manage-departments/update-department/update-department.component';
 
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { ManageContratsModule } from './manage-contrats/manage-contrats.module';
 
 
 
@@ -38,7 +37,6 @@ import { ManageContratsModule } from './manage-contrats/manage-contrats.module';
     MatFormFieldModule,
     MatInputModule,
     MatInputModule,
-    ManageContratsModule,
   ],
   declarations: [
     AppComponent,

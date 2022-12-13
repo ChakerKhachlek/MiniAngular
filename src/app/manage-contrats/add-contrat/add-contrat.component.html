@@ -21,18 +21,18 @@
 
                                             </select>
                                         </mat-form-field>
-                                        <!-- <small style="color: red;" *ngIf="reactiveForm.get('archive')?.errors?.['required'] &&
-                                reactiveForm.get('archive')?.touched"> Please put the archive </small> -->
+                                         <small style="color: red;" *ngIf="reactiveForm.get('archive')?.errors?.['required'] &&
+                                reactiveForm.get('archive')?.touched"> Please put the archive </small> 
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Montant" formControlName="montant" required>
+                                            <input matInput type="number" placeholder="Montant" formControlName="montant" required>
                                         </mat-form-field>
-                                        <!-- <small style="color: red;" *ngIf="reactiveForm.get('montant')?.errors?.['required'] &&
-                                reactiveForm.get('montant')?.touched"> Please put the amount </small> -->
+                                         <small style="color: red;" *ngIf="reactiveForm.get('montant')?.errors?.['required'] &&
+                                reactiveForm.get('montant')?.touched"> Please put the amount </small> 
                                     </div>
                                 </div>
 
@@ -49,8 +49,8 @@
 
                                             </select>
                                         </mat-form-field>
-                                        <!-- <small style="color: red;" *ngIf="reactiveForm.get('specialite')?.errors?.['required'] &&
-                                reactiveForm.get('specialite')?.touched"> Please put the speciality </small> -->
+                                         <small style="color: red;" *ngIf="reactiveForm.get('specialite')?.errors?.['required'] &&
+                                reactiveForm.get('specialite')?.touched"> Please put the speciality </small> 
                                     </div>
                                 </div>
                             </div>
@@ -64,8 +64,8 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
-                                    <!-- <small style="color: red;" *ngIf="reactiveForm.get('dateDebutContrat')?.errors?.['required'] &&
-                                reactiveForm.get('dateDebutContrat')?.touched"> Please put the start date </small> -->
+                                     <small style="color: red;" *ngIf="reactiveForm.get('dateDebutContrat')?.errors?.['required'] &&
+                                reactiveForm.get('dateDebutContrat')?.touched"> Please put the start date </small> 
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field appearance="fill">
@@ -75,13 +75,13 @@
                                         <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                                         <mat-datepicker #picker1></mat-datepicker>
                                     </mat-form-field>
-                                    <!-- <small style="color: red;" *ngIf="reactiveForm.get('dateFinContrat')?.errors?.['required'] &&
-                                reactiveForm.get('dateFinContrat')?.touched"> Please put the End date </small> -->
+                                     <small style="color: red;" *ngIf="reactiveForm.get('dateFinContrat')?.errors?.['required'] &&
+                                reactiveForm.get('dateFinContrat')?.touched"> Please put the End date </small> 
                                 </div>
                             </div>
                             <div mat-dialog-actions>
                                 <button class="btn btn-sm btn-danger mr-2" (click)="onNoClick()">Annuler</button>
-                                <button class="btn btn-sm btn-info pull-left" (click)="addContrat()" cdkFocusInitial>Add
+                                <button class="btn btn-sm btn-info pull-left" (click)="addContrat()" cdkFocusInitial [disabled]="reactiveForm.invalid">Add
                                     Contract</button>
                             </div>
                         </form>
