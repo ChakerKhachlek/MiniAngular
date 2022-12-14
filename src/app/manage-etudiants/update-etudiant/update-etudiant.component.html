@@ -17,14 +17,15 @@
                 </small>
                 <small style="color: red;" *ngIf="reactiveForm.get('nom')?.errors?.['minlength'] &&
                                 reactiveForm.get('nom')?.touched">
-                  Prenom at least 3 caracters
-                </small>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <input class="form-control" placeholder="Prenom" formControlName="prenom">
-                <small style="color: red;" *ngIf="reactiveForm.get('prenom')?.errors?.['required'] &&
+                                Nom at least 3 caracters
+                              </small>
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Prenom" formControlName="prenom">
+                                <small style="color: red;"
+                                *ngIf="reactiveForm.get('prenom')?.errors?.['required'] &&
                                 reactiveForm.get('prenom')?.touched">
                   Prenom is required
                 </small>
@@ -35,20 +36,37 @@
               </div>
 
 
-            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <input class="form-control" placeholder="Email" formControlName="email">
+                              <small style="color: red;"
+                              *ngIf="reactiveForm.get('email')?.errors?.['required'] &&
+                              reactiveForm.get('email')?.touched">
+                              Email is required
+                            </small>
+                            <small style="color: red;"
+                              *ngIf="reactiveForm.get('email')?.errors?.['pattern'] &&
+                              reactiveForm.get('email')?.touched">
+                              Email must be valid
+                            </small>
+                              </div>
 
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Option</label>
-                <select class="form-control" formControlName="option">
-                  <option value="">Select option</option>
-                  <option value="GAMIX">GAMIX</option>
-                  <option value="SE">SE</option>
-                  <option value="SIM">SIM</option>
-                  <option value="NIDS">NIDS</option>
-                </select>
-                <small style="color: red;" *ngIf="reactiveForm.get('option')?.errors?.['required'] &&
+                      </div>
+                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label >Option</label>
+                                <select class="form-control" formControlName="option">
+                                <option value="">Select option</option>
+                                  <option value="GAMIX">GAMIX</option>
+                                  <option value="SE">SE</option>
+                                  <option value="SIM">SIM</option>
+                                  <option value="NIDS">NIDS</option>
+                                </select>
+                                <small style="color: red;"
+                                *ngIf="reactiveForm.get('option')?.errors?.['required'] &&
                                 reactiveForm.get('option')?.touched">
                   Option is required
                 </small>

@@ -10,9 +10,9 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ManageEtudiantsComponent } from 'app/manage-etudiants/manage-etudiants.component';
 import { ManageUniversitiesComponent } from 'app/manage-universities/manage-universities.component';
-import { ManageContractsComponent } from 'app/manage-contracts/manage-contracts.component';
 import { ManageEquipesComponent } from 'app/manage-equipes/manage-equipes.component';
 import { ManageDepartmentsComponent } from 'app/manage-departments/manage-departments.component';
+import { ManageContratsModule } from '../../manage-contrats/manage-contrats.module';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -61,9 +61,13 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'manage-etudiants',     component: ManageEtudiantsComponent },
     { path: 'manage-universities',     component: ManageUniversitiesComponent },
-    { path: 'manage-contracts',          component: ManageContractsComponent },
+    
     { path: 'manage-equipes',           component: ManageEquipesComponent },
-    { path: 'manage-departments',           component: ManageDepartmentsComponent }
+    { path: 'manage-departments',           component: ManageDepartmentsComponent },
+    {path:'manage-contrats',
+    loadChildren:()=>import('../../manage-contrats/manage-contrats.module').then(m=>ManageContratsModule)
+    },   
+     { path: 'manage-equipes',           component: ManageEquipesComponent },
 
 
 ];

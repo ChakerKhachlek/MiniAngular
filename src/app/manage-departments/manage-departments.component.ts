@@ -10,22 +10,23 @@ import { Router } from 'express';
 })
 export class ManageDepartmentsComponent implements OnInit {
   listDepartments:Department[] = [];
-  //createMode : boolean ;
-  //updateMode : boolean ;
+  createMode : boolean ;
+  updateMode : boolean ;
 
-   //listdepartment:Department[] ;
- // selectedDepartment: Department;
+   listdepartment:Department[] ;
+ selectedDepartment: Department;
 
   
 
   constructor(private departmentService : DepartmentServiceService) { 
-  //  this.listDepartments=[];
+    
   }
 
   ngOnInit(): void {
     this.getDepartments();
-   // this.createMode=false;
+    this.createMode=true;
    // this.updateMode=false;
+   this.listDepartments=[];
   }
 
   getDepartments(){
@@ -34,7 +35,32 @@ export class ManageDepartmentsComponent implements OnInit {
       console.log(data);
       
     });
+  
+}
+deleteDepartment(dep:Department){
+  this.departmentService.deleteDepartment(dep.idDepart).subscribe(function(dep,data) {
+    console.log(data);
+    this.removeElementFromArray(dep);
+    }.bind(this,dep));
+  
+ }
+ removeElementFromArray(element: Department) {
+  this.listDepartments.forEach((value,index)=>{
+      if(value==element) this.listDepartments.splice(index,1);
+  });}
+
+  updateModeActive(departement :Department){
+    this.selectedDepartment=departement;
+    this.createMode=false;
+    this.updateMode=true;
+   
+  }
+  
+  departmentUpdated(departement :Department){
+    this.updateMode=false;
+    this.createMode=true;
+  
+  }
+}
 
 
-
-}}

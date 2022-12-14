@@ -1,1 +1,42 @@
-<p>add-department works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Add Department</h4>
+                <p class="card-category">Create new department</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="reactiveForm" (ngSubmit)="addDepartment()">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Nom department" formControlName="nomDep">
+                                <small style="color: red;"
+                                *ngIf="reactiveForm.get('nomDep')?.errors?.['required'] &&
+                                reactiveForm.get('nomDep')?.touched">
+                                Nom is required
+                              </small>
+                              <small style="color: red;"
+                                *ngIf="reactiveForm.get('nomDep')?.errors?.['minlength'] &&
+                                reactiveForm.get('nomDep')?.touched">
+                                Prenom at least 3 caracters
+                              </small>
+                                </div>
+                        </div>
+                        
+                    </div>
+                   
+                    <small style="color: red;"
+                    *ngIf="!reactiveForm.valid">
+                    Verify inputs.
+                  </small>
+                   
+                    <button  type="submit" (click)="addDepartment()" class="btn btn-danger pull-right">Add Department</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+</div>

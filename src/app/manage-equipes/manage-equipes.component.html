@@ -1,8 +1,185 @@
-
+<!-- form-->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <p>manage-equipes works!</p>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger" id="up">
+                        <h4 class="card-title">Ajouter Equipe</h4>
+                        <p class="card-category">Veuillez saisir les informations de l'équipe</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="reactiveForm" (ngSubmit)="addEquipe()">
+                            <div class="row">
+                
+                                <div class="col-md-7">
+                                    <div class="form-group">
+
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Nom" formControlName="nom" required>
+                                      <small style="color: red;"
+                                *ngIf="reactiveForm.get('nom')?.errors?.['required'] &&
+                                reactiveForm.get('nom')?.touched">
+                                Nom is required
+                              </small>
+                              <small style="color: red;"
+                                *ngIf="reactiveForm.get('nom')?.errors?.['minlength'] &&
+                                reactiveForm.get('nom')?.touched">
+                                Nom au moins 3 caracters
+                              </small>
+                                    </mat-form-field>
+                                </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Niveau</mat-label>
+                                        <select matNativeControl formControlName="niveau" required>
+                                            <option value="EXPERT">EXPERT</option>
+                                            <option value="SENIOR">SENIOR</option>
+                                            <option value="JUNIOR">JUNIOR</option>
+                                        </select>    
+                                        <small style="color: red;"
+                                *ngIf="reactiveForm.get('niveau')?.errors?.['required'] &&
+                                reactiveForm.get('niveau')?.touched">
+                                niveau is required
+                              </small>                               
+                                     </mat-form-field>
+                                     </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Thematique" type="text" formControlName="thematique" required>
+                                    <small style="color: red;"
+                                    *ngIf="reactiveForm.get('thematique')?.errors?.['required'] &&
+                                    reactiveForm.get('thematique')?.touched">
+                                    thematique is required
+                                  </small>
+                                  <small style="color: red;"
+                                    *ngIf="reactiveForm.get('thematique')?.errors?.['minlength'] &&
+                                    reactiveForm.get('thematique')?.touched">
+                                    thematique au moins 3 caracters
+                                  </small>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput min="1" placeholder="Salle" type="number" formControlName="salle"  required>
+                                      <small style="color: red;"
+                                    *ngIf="reactiveForm.get('salle')?.errors?.['required'] &&
+                                    reactiveForm.get('salle')?.touched">
+                                    Salle is required
+                                    <small style="color: red;"
+                                    *ngIf="reactiveForm.get('salle')?.errors?.['min'] &&
+                                    reactiveForm.get('salle')?.touched">
+                                    salle au moins 1
+                                  </small>
+                                  </small>
+                                    </mat-form-field>
+                                </div>
+                                
+                           </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" *ngIf="updateB==false">Ajouter Equipe</button>
+                            
+                            <button mat-raised-button class="btn btn-danger pull-right" (click)="updateEquipe(e)" *ngIf="updateB==true">Modifier Equipe</button>
+
+                            <button mat-raised-button  class="btn btn-danger pull-right" (click)="backToAdd()" *ngIf="updateB==true"><i class="material-icons ">arrow_back</i></button>
+                        </form>
+                    </div>
+                </div>
             </div>
+   
+        </div>
+  
+  
+<!--end form-->  
+<!--table-->
+
+
+
+   
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Equipes</h4>                
+                        <p class="card-category"> Informations des equipes </p>
+                        <div class="row pull-right" >
+                       
+                                
+                              <input class="form-control col-md-4" type="text" placeholder="search" name="search" [(ngModel)]="searchText" autocomplete="off"/>
+                              <button mat-raised-button  class="btn btn-success mx-4"(click)="download()">Exporter en PDF</button>
+                            
+                     </div>
+                            
+    
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" >
+                            <table class="table" id="table" #table>
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    <th>
+                                        Niveau
+                                    </th>
+                                    <th>
+                                        Thematique
+                                    </th>
+                                    <th>
+                                        Salle
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                  
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let e of listEquipes | filter:searchText; index as i">
+                                        <td>
+                                            {{e.idEquipe}}
+                                        </td>
+                                        <td>
+                                            {{e.nomEquipe}}
+                                        </td>
+                                        <td>
+                                            {{e.niveau}}
+                                        </td>
+                                        <td>
+                                            {{e.detailEquipe.thematique}}
+
+                                        </td>
+                                        <td>
+                                            {{e.detailEquipe.salle}}
+                                        </td>
+                                        
+                                           
+
+                                            <td>
+                                                <button (click)="pushEquipeForUpdate(e)" class="btn btn-sm btn-info pull-left" href="#up">Edit <i class="material-icons ">edit</i></button>
+                                                <button (click)="deleteEquipe(e.idEquipe)" class="btn btn-sm btn-danger ">Delete <i class="material-icons ">delete</i></button>
+                                            </td>
+                                        
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
+            
+
+        </div>
+    </div>
+  </div>
+  <!--end table-->

@@ -1,0 +1,90 @@
+
+<!--<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Specialite</th>
+            <th>Archive</th>
+            <th>Montant</th>
+            <th>dateDebutContrat</th>
+            <th>dateFinContrat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let contrat of listContrats">
+            <td>{{contrat.id}}</td>
+            <td>{{contrat.specialite}}</td>
+            <td>{{contrat.archive}}</td>
+            <td>{{contrat.montant}}</td>
+            <td>{{contrat.dateDebutContrat}}</td>
+            <td>{{contrat.dateFinContrat}}</td>
+        </tr>
+    </tbody>
+</table>-->
+<div class="main-content">
+    <div class="container-fluid">
+
+<div class="row">
+    <div class="col-md-12">
+    <app-add-contrat [listContrats]="listContrats"></app-add-contrat>
+</div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Specialite
+                                    </th>
+                                    <th>
+                                        Archive
+                                    </th>
+                                    <th>
+                                        Montant
+                                    </th>
+                                    <th>
+                                        DateDebutContrat
+                                    </th>
+                                    <th>
+                                        DateFinContrat
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contrat of listContrats">
+                                        <td>{{contrat.idContrat}}</td>
+                                        <td>{{contrat.specialite}}</td>
+                                        <td>{{contrat.archive}}</td>
+                                        <td>{{contrat.montantContrat}}</td>
+                                        <td>{{contrat.dateDebutContrat}}</td>
+                                        <td>{{contrat.dateFinContrat}}</td>
+                                        <td>
+                                            <button (click)="updateContrat(contrat)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
+                                            <button (click)="removeContrat(contrat.idContrat)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+  

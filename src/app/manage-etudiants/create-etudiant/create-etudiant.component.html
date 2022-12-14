@@ -1,72 +1,80 @@
 <div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header card-header-danger">
-        <h4 class="card-title">Add Etudiant</h4>
-        <p class="card-category">Create new etudiant</p>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="reactiveForm" (ngSubmit)="addEtudiant()">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <input class="form-control" placeholder="Nom" formControlName="nom">
-                <small style="color: red;" *ngIf="reactiveForm.get('nom')?.errors?.['required'] &&
-                                reactiveForm.get('nom')?.touched">
-                  Nom is required
-                </small>
-                <small style="color: red;" *ngIf="reactiveForm.get('nom')?.errors?.['minlength'] &&
-                                reactiveForm.get('nom')?.touched">
-                  Prenom at least 3 caracters
-                </small>
-              </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Add Etudiant</h4>
+                <p class="card-category">Create new etudiant</p>
             </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <input class="form-control" placeholder="Prenom" formControlName="prenom">
-                <small style="color: red;" *ngIf="reactiveForm.get('prenom')?.errors?.['required'] &&
-                                reactiveForm.get('prenom')?.touched">
-                  Prenom is required
-                </small>
-                <small style="color: red;" *ngIf="reactiveForm.get('prenom')?.errors?.['minlength'] &&
-                                reactiveForm.get('prenom')?.touched">
-                  Prenom at least 3 caracters
-                </small>
-              </div>
+            <div class="card-body">
+                <form #f="ngForm" (ngSubmit)="addEtudiant()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Nom" minlength="3" name="nom" required [(ngModel)]="etudiant.nom" #nom="ngModel">
+                                <small style="color: red;"
+                                *ngIf="nom.errors?.['required'] && nom.touched">
+                                Nom is required
+                              </small>
+                              <small style="color: red;"
+                                *ngIf="nom.errors?.['minlength']">
+                                Prenom at least 3 caracters
+                              </small>
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Prenom" minlength="3" name="prenom"  required [(ngModel)]="etudiant.prenom"  #prenom="ngModel">
+                                <small style="color: red;"
+                                *ngIf="prenom.errors?.['required'] && prenom.touched">
+                                Prenom is required
+                              </small>
+                              <small style="color: red;"
+                                *ngIf="prenom.errors?.['minlength']">
+                                Prenom at least 3 caracters
+                              </small>
+                                </div>
 
+                        </div>
 
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <input class="form-control" placeholder="Email" pattern="^[a-zA-Z0-9._% -]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" name="email"  [(ngModel)]="etudiant.email"  #email="ngModel">
+                              
+                            <small style="color: red;"
+                              *ngIf="email.errors?.['pattern']">
+                              Email must be valid
+                            </small>
+                              </div>
+
+                      </div>
+                      
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label >Option</label>
+                                <select class="form-control" required [(ngModel)]="etudiant.option" name="option"  #option="ngModel">
+                                <option value="">Select option</option>
+                                  <option value="GAMIX">GAMIX</option>
+                                  <option value="SE">SE</option>
+                                  <option value="SIM">SIM</option>
+                                  <option value="NIDS">NIDS</option>
+                                </select>
+                                <small style="color: red;"
+                                *ngIf="option.invalid && option.touched">
+                                Option is required
+                              </small>
+                              </div>
+                           
+                        </div>
+                    </div>
+                   
+                   
+                   
+                    <button  [disabled]="f.invalid" type="submit" class="btn btn-danger pull-right">Add Etudiant</button>
+                    <div class="clearfix"></div>
+                </form>
             </div>
-
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Option</label>
-                <select class="form-control" formControlName="option">
-                  <option value="">Select option</option>
-                  <option value="GAMIX">GAMIX</option>
-                  <option value="SE">SE</option>
-                  <option value="SIM">SIM</option>
-                  <option value="NIDS">NIDS</option>
-                </select>
-                <small style="color: red;" *ngIf="reactiveForm.get('option')?.errors?.['required'] &&
-                                reactiveForm.get('option')?.touched">
-                  Option is required
-                </small>
-              </div>
-
-            </div>
-          </div>
-
-          <small style="color: red;"
-            *ngIf="!reactiveForm.valid && reactiveForm.get('option')?.touched && reactiveForm.get('nom')?.touched && reactiveForm.get('prenom')?.touched">
-            Verify inputs.
-          </small>
-
-          <button type="submit" class="btn btn-danger pull-right">Add Etudiant</button>
-          <div class="clearfix"></div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
-
+   
 </div>
