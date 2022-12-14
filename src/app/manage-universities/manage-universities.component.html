@@ -1,8 +1,50 @@
 
 <div class="main-content">
     <div class="container-fluid">
+        <div></div>
+        <app-create-universite [listUniversites]="listUniversites" *ngIf="createMode"></app-create-universite>
+        <app-update-universite (requested)=universiteUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listUniversites]="listUniversites" [selectedUniversite]="selectedUniversite"  *ngIf="updateMode"></app-update-universite>
         <div class="row">
-            <p>manage-universities works!</p>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">List Universites</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Université
+                                    </th>
+                                </thead>
+                                <tbody  *ngFor="let universite of listUniversites">
+                              
+                                    <tr>
+                                        <td>
+                                            {{ universite.idUniv }}
+                                        </td>
+                                        <td>
+                                            {{ universite.nomUniv }}
+                                        </td>  
+                                        <td>
+                                            <button (click)="updateModeActive(universite)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
+                                            <button (click)="removeEtudiant(universite)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
+                                        </td>
+                                       
+                                    </tr>
+                                  
+                         
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             </div>
+            </div>
+            <button class="btn btn-primary" (click)="goToAdmin()"> return to Dashboard </button>
             </div>

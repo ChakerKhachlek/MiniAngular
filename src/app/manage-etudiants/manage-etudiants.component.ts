@@ -11,15 +11,16 @@ import { NotificationServiceService } from 'app/core/services/notification-servi
 })
 export class ManageEtudiantsComponent {
 
-  createMode : boolean ;
-  updateMode : boolean ;
+  createMode: boolean;
+  updateMode: boolean;
 
    listEtudiants:Etudiant[] ;
    etudiants:Etudiant[];
   selectedEtudiant: Etudiant;
 
-  constructor( private route:Router,private etudiantService : EtudiantServiceService,private notification : NotificationServiceService){
-   this.listEtudiants=[];
+  constructor(private route: Router, private etudiantService: EtudiantServiceService,
+    private notification: NotificationServiceService) {
+    this.listEtudiants = [];
   }
   
   displayStyle = "none";
@@ -30,22 +31,22 @@ export class ManageEtudiantsComponent {
   btnDisplay:boolean=false;
   ngOnInit(): void {
     this.getEtudiants();
-    this.createMode=true;
-    this.updateMode=false;
+    this.createMode = true;
+    this.updateMode = false;
   }
 
-  getEtudiants(){
+  getEtudiants() {
     this.etudiantService.getAllEtudiants().subscribe(data => {
       this.listEtudiants= data;
       this.etudiants=this.listEtudiants;
       console.log(data);
-      
-    });
-    
-   }
 
-   removeEtudiant(etudiant:Etudiant){
-    this.etudiantService.deleteEtudiant(etudiant.id).subscribe(function(etudiant,data) {
+    });
+
+  }
+
+  removeEtudiant(etudiant: Etudiant) {
+    this.etudiantService.deleteEtudiant(etudiant.id).subscribe(function (etudiant, data) {
       console.log(data);
       this.removeElementFromArray(etudiant);
       this.getEtudiants();
@@ -56,8 +57,8 @@ export class ManageEtudiantsComponent {
    }
 
   removeElementFromArray(element: Etudiant) {
-    this.listEtudiants.forEach((value,index)=>{
-        if(value==element) this.listEtudiants.splice(index,1);
+    this.listEtudiants.forEach((value, index) => {
+      if (value == element) this.listEtudiants.splice(index, 1);
     });
 
  
@@ -78,7 +79,7 @@ export class ManageEtudiantsComponent {
       this.searchTerm='';
     }
 
-   goToAdmin() {
+  goToAdmin() {
     this.route.navigate(['dashboard']);
     }
 
