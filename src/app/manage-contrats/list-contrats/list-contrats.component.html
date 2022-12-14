@@ -1,4 +1,3 @@
-
 <!--<table>
     <thead>
         <tr>
@@ -24,67 +23,186 @@
 <div class="main-content">
     <div class="container-fluid">
 
-<div class="row">
-    <div class="col-md-12">
-    <app-add-contrat [listContrats]="listContrats"></app-add-contrat>
-</div>
-
-    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Specialite
-                                    </th>
-                                    <th>
-                                        Archive
-                                    </th>
-                                    <th>
-                                        Montant
-                                    </th>
-                                    <th>
-                                        DateDebutContrat
-                                    </th>
-                                    <th>
-                                        DateFinContrat
-                                    </th>
-                                    <th>
-                                        Action
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let contrat of listContrats">
-                                        <td>{{contrat.idContrat}}</td>
-                                        <td>{{contrat.specialite}}</td>
-                                        <td>{{contrat.archive}}</td>
-                                        <td>{{contrat.montantContrat}}</td>
-                                        <td>{{contrat.dateDebutContrat}}</td>
-                                        <td>{{contrat.dateFinContrat}}</td>
-                                        <td>
-                                            <button (click)="updateContrat(contrat)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">edit</i></button>
-                                            <button (click)="removeContrat(contrat.idContrat)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">delete</i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <app-add-contrat (createModeEvent)="toggleCreatEtudiantForm($event)" [listContrats]="listContrats"
+                    *ngIf="createMode"></app-add-contrat>
+                <button (click)="toggleCreatEtudiantForm(true)" *ngIf="!createMode"
+                    class="btn btn-sm btn-info pull-left">Create Contract<i class="material-icons ">add</i></button>
+
+            </div>
+
+            <div class="container-fluid">
+
+                <mat-form-field class="example-full-width">
+                    <input matInput type="text" placeholder="search by amount" [(ngModel)]="searchArchive"
+                        (input)="search()" />
+                    <i class="material-icons ">search</i>
+
+                </mat-form-field>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title ">Contracts Table</h4>
+                                <p class="card-category"> contracts list </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>
+                                                ID
+                                            </th>
+                                            <th>
+                                                Specialite
+                                            </th>
+                                            <th>
+                                                Archive
+                                            </th>
+                                            <th>
+                                                Montant
+                                            </th>
+                                            <th>
+                                                DateDebutContrat
+                                            </th>
+                                            <th>
+                                                DateFinContrat
+                                            </th>
+                                            <th>
+                                                Action
+                                            </th>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let contrat of listContrats1">
+                                                <td>{{contrat.idContrat}}</td>
+                                                <td>{{contrat.specialite}}</td>
+                                                <td>{{contrat.archive}}</td>
+                                                <td>{{contrat.montantContrat}}</td>
+                                                <td>{{contrat.dateDebutContrat}}</td>
+                                                <td>{{contrat.dateFinContrat}}</td>
+                                                <td>
+                                                    <button (click)="updateContrat(contrat)"
+                                                        class="btn btn-sm btn-info pull-left">Edit <i
+                                                            class="material-icons ">edit</i></button>
+                                                    <button (click)="removeContrat(contrat.idContrat)"
+                                                        class="btn btn-sm btn-danger ">Del <i
+                                                            class="material-icons ">delete</i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+       <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div mat-dialog-title class="card-header card-header-danger ">
+                        <h4 class="card-title">Chiffre Affaire Entre Deux Dates</h4>
+                        <p class="card-category">Please fill the start and the end date </p>
+                    </div>
+        
+                    <div class="card-body">
+                        <form [formGroup]="reactiveForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Start Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="dateDebutContrat">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                     <small style="color: red;" *ngIf="reactiveForm.get('dateDebutContrat')?.errors?.['required'] &&
+                                        reactiveForm.get('dateDebutContrat')?.touched"> Please put the start date </small>
+                                    <small style="color: red;"
+                                        *ngIf="!reactiveForm.get('dateDebutContrat')?.errors?.['required'] && !reactiveForm.get('dateFinContrat')?.errors?.['required']
+                                        && reactiveForm.get('dateDebutContrat').value > reactiveForm.get('dateFinContrat').value"> the start date
+                                        should be before the end date </small> 
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>End Date</mat-label>
+                                        <input matInput [matDatepicker]="picker1" formControlName="dateFinContrat">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                     <small style="color: red;" *ngIf="reactiveForm.get('dateFinContrat')?.errors?.['required'] &&
+                                        reactiveForm.get('dateFinContrat')?.touched"> Please put the End date </small> 
+                                </div>
+    
+                            </div>
+                            <div mat-dialog-actions>
+                                <button class="btn btn-sm btn-info pull-left" (click)="ChiffreAffaireEntreDeuxDate()" cdkFocusInitial
+                                   > Chiffre Affaire Entre Deux Dates</button>
+                            </div>
+                            <div *ngIf="show">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="number" [(ngModel)]="montant">
+                                </mat-form-field>
+                            </div>
+                        </form>
+                    </div>
+        
+                </div>
+            </div>
+        
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div mat-dialog-title class="card-header card-header-danger ">
+                        <h4 class="card-title">Chiffre Affaire Entre Deux Dates</h4>
+                        <p class="card-category">Please fill the start and the end date </p>
+                    </div>
+        
+                    <div class="card-body">
+                        <form [formGroup]="reactiveForm1">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Start Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="dateDebContrat">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                     <small style="color: red;" *ngIf="reactiveForm.get('dateDebContrat')?.errors?.['required'] &&
+                                        reactiveForm.get('dateDebContrat')?.touched"> Please put the start date </small>
+                                    <small style="color: red;"
+                                        *ngIf="!reactiveForm.get('dateDebContrat')?.errors?.['required'] && !reactiveForm.get('dateFiContrat')?.errors?.['required']
+                                        && reactiveForm.get('dateDebContrat').value > reactiveForm.get('dateFiContrat').value"> the start date
+                                        should be before the end date </small> 
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>End Date</mat-label>
+                                        <input matInput [matDatepicker]="picker1" formControlName="dateFiContrat">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                     <small style="color: red;" *ngIf="reactiveForm.get('dateFiContrat')?.errors?.['required'] &&
+                                        reactiveForm.get('dateFiContrat')?.touched"> Please put the End date </small> 
+                                </div>
+    
+                            </div>
+                            <div mat-dialog-actions>
+                                <button class="btn btn-sm btn-info pull-left" (click)="nbContratsValides()" cdkFocusInitial
+                                   > Number of valid contracts</button>
+                            </div>
+                        </form>
+                    </div>
+        
+                </div>
+            </div>
+        
+        </div>-->
     </div>
-  </div>
-  </div>
 </div>
-  
