@@ -2,7 +2,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div></div>
-        <app-create-etudiant [listEtudiants]="listEtudiants" *ngIf="createMode"></app-create-etudiant>
+        <app-create-etudiant (requested)=etudiantAdded($event) [listEtudiants]="listEtudiants"  [etudiants]="etudiants" *ngIf="createMode"></app-create-etudiant>
         <app-update-etudiant (requested)=etudiantUpdated($event) [createMode]="createMode" [updateMode]="updateMode" [listEtudiants]="listEtudiants" [selectedEtudiant]="selectedEtudiant"  *ngIf="updateMode"></app-update-etudiant>
         <div class="row">
             <div class="col-md-12">
@@ -11,6 +11,20 @@
                         <h4 class="card-title mt-0">List Etudiants</h4>
                     </div>
                     <div class="card-body">
+                        <form class="wrap">
+                            <div class="search">
+                              <h3>Search etudiant by email filter : </h3>
+                              <div class="row my-2">
+                                <div class="col-md-4">
+                                <input class="searchTerm" type="text" name="searchTerm"  class="form-control"
+                                placeholder="Filter by etudiant email"
+                                [(ngModel)]="searchTerm" (input)="search(searchTerm)" />
+                                 </div>
+                              </div>
+                              
+                            </div>
+                          </form>
+
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead class="">
@@ -24,13 +38,19 @@
                                         Prenom
                                     </th>
                                     <th>
+                                        Email
+                                    </th>
+                                    <th>
                                         Option
                                     </th>
                                     <th> 
                                         Edit/Delete
                                     </th>
+                                    <th> 
+                                        Contact
+                                    </th>
                                 </thead>
-                                <tbody  *ngFor="let etudiant of listEtudiants">
+                                <tbody  *ngFor="let etudiant of etudiants | searchFilter: searchTerm; index as i">
                               
                                     <tr>
                                         <td>
@@ -43,19 +63,58 @@
                                             {{ etudiant.prenom }}
                                         </td>
                                         <td>
+                                            {{ etudiant.email }}
+                                        </td>
+                                        <td>
                                             {{ etudiant.option }}
                                         </td>   
                                         <td>
-                                            <button (click)="updateModeActive(etudiant)" class="btn btn-sm btn-info pull-left">Edit <i class="material-icons ">Modifier</i></button>
-                                            <button (click)="removeEtudiant(etudiant)" class="btn btn-sm btn-danger ">Del <i class="material-icons ">Supprimer</i></button>
+                                            <button (click)="updateModeActive(etudiant)" class="btn btn-sm btn-info pull-left">Edit </button>
+                                            <button (click)="removeEtudiant(etudiant)" class="btn btn-sm btn-danger ">Del </button>
+                                        </td>
+                                        <td>
+                                            <button (click)="openPopup(etudiant.id)" class="btn btn-sm btn-success pull-left">Send</button>
                                         </td>
                                        
                                     </tr>
-                                  
-                                
+                                    
+                                   
                                  
                                 </tbody>
                             </table>
+                            <div
+                                    class="modal"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    [ngStyle]="{'display':displayStyle}">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">Send Mail</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form>
+                                                <textarea class="form-control" matInput matTextareaAutosize [(ngModel)]="emailMessage" >
+                                                </textarea>
+                                                  
+                                            </form>
+                                        
+                                            <div class="row"><div class="col-md-10"></div> <div class="col-md-2 mr-1"><button type="button" class="btn btn-success btn-sm" 
+                                                (click)="sendEmail()" [disabled]="btnDisplay">
+                                          Send
+                                        </button></div></div>
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-danger" 
+                                                  (click)="closePopup()">
+                                            Close
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                         </div>
                     </div>
                 </div>

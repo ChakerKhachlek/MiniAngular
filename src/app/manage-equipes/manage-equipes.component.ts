@@ -3,6 +3,7 @@ import { FormArray,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DetailsEquipe } from 'app/core/models/detailsEquipe';
 import { Equipe } from 'app/core/models/equipe';
 import { EquipeService } from 'app/core/services/equipe/equipe.service';
+import { NotificationServiceService } from 'app/core/services/notification-service.service';
 
 @Component({
   selector: 'app-manage-equipes',
@@ -10,11 +11,12 @@ import { EquipeService } from 'app/core/services/equipe/equipe.service';
   styleUrls: ['./manage-equipes.component.scss']
 })
 export class ManageEquipesComponent {
-  @Input() selectedEquipe:Equipe ;
+  selectedEquipe:Equipe ;
 
    listEquipes:Equipe[] = [];
-
-   constructor(private EquipeS : EquipeService,private fb : FormBuilder,){
+  updateB =false;
+  
+   constructor(private EquipeS : EquipeService,private fb : FormBuilder,private notification :NotificationServiceService){
     
    }
 
@@ -43,14 +45,31 @@ export class ManageEquipesComponent {
      });
      
     }
-
+    removeElementFromArray(element: Equipe) {
+      this.listEquipes.forEach((value,index)=>{
+          if(value==element) {
+          this.listEquipes.splice(index,1);}
+      });
+  }
 
      deleteEquipe(e){
-      this.EquipeS.deleteEquipe(e).subscribe(data =>{
-      location.reload();
-    }
+
+      this.EquipeS.deleteEquipe(e).subscribe(function(e,data) {
+        console.log(data);
+        this.removeElementFromArray(e);
+        
+        this.notification.showNotification('top','right','Equipe supprimé avec succès !','danger');
+        }.bind(this,e));
+    
+        
+    //   this.EquipeS.deleteEquipe(e).subscribe(data =>{
+    //     this.removeElementFromArray(e);
+      
+    //   this.notification.showNotification('top','right','Equipe supprimé avec succès !','success');
+
+    // }.bind(this,e));
   
-    )}
+    }
 
 
 
@@ -68,25 +87,40 @@ export class ManageEquipesComponent {
     
         console.log("XXX",equipeD,equipe);
         this.EquipeS.createEquipe(equipe).subscribe(equipe => this.listEquipes.push(equipe as Equipe));
-    
+        this.notification.showNotification('top','right','Equipe ajouté avec succès !','success');
        
-      window.location.reload();
-
     }
   }
 
-    updateEtudiant(){
+    pushEquipeForUpdate(e : Equipe){
+      this.updateB= true;
+      this.reactiveForm.get('nom').setValue(e.nomEquipe);
+      this.reactiveForm.get('niveau').setValue(e.niveau);
+      this.reactiveForm.get('thematique').setValue(e.detailEquipe.thematique);
+      this.reactiveForm.get('salle').setValue(e.detailEquipe.salle.toString());
+
+    }
+
+    backToAdd(){
+
+      this.updateB=false;
+      this.reactiveForm.reset();
+    }
+
+    updateEquipe(e :any){
       if(this.reactiveForm.valid){
+        console.log(e);
         let newEquipe=new Equipe();
    
         newEquipe.nomEquipe = this.reactiveForm.get('nom').value;
         newEquipe.niveau = this.reactiveForm.get('niveau').value;
+        //newEquipe.detailEquipe.salle= +this.reactiveForm.get('salle').value;
+        //newEquipe.detailEquipe.thematique= this.reactiveForm.get('thematique').value;
+        newEquipe.idEquipe=e.idEquipe;
     
-        newEquipe.idEquipe=this.selectedEquipe.idEquipe;
-    
-        this.EquipeS.updateEquipe(newEquipe).subscribe(function(selectedEquipe,newEquipe) {
+        this.EquipeS.updateEquipe(newEquipe).subscribe(function(e,newEquipe) {
 
-          this.updateElementFromArray(selectedEquipe,newEquipe as Equipe);
+          this.updateElementFromArray(e,newEquipe as Equipe);
         
           this.requested.emit(newEquipe);
           console.log(this.updateMode,this.createMode);

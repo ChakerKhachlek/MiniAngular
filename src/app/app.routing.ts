@@ -4,29 +4,17 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 const routes: Routes =[
-  {
-    path: '',
-    redirectTo: 'landing',
-    pathMatch: 'full',
-  }, 
-  {
-    path:'landing',
-    component:LandingPageComponent
-  }
-  ,{
+
+ {
     path: '',
     component: AdminLayoutComponent,
     children: [{
       path: '',
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
-  },
-  {
-    path:'**',
-    component:LandingPageComponent
   }
 ];
 

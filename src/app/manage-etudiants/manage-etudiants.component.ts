@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Etudiant } from 'app/core/models/etudiant';
 import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-service.service';
 import { NotificationServiceService } from 'app/core/services/notification-service.service';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-manage-etudiants',
@@ -16,11 +15,19 @@ export class ManageEtudiantsComponent {
   updateMode : boolean ;
 
    listEtudiants:Etudiant[] ;
+   etudiants:Etudiant[];
   selectedEtudiant: Etudiant;
 
   constructor( private route:Router,private etudiantService : EtudiantServiceService,private notification : NotificationServiceService){
    this.listEtudiants=[];
   }
+  
+  displayStyle = "none";
+
+  emailMessage :string ="";
+  searchTerm = '';
+  selectedId:Number;
+  btnDisplay:boolean=false;
   ngOnInit(): void {
     this.getEtudiants();
     this.createMode=true;
@@ -30,6 +37,7 @@ export class ManageEtudiantsComponent {
   getEtudiants(){
     this.etudiantService.getAllEtudiants().subscribe(data => {
       this.listEtudiants= data;
+      this.etudiants=this.listEtudiants;
       console.log(data);
       
     });
@@ -40,6 +48,8 @@ export class ManageEtudiantsComponent {
     this.etudiantService.deleteEtudiant(etudiant.id).subscribe(function(etudiant,data) {
       console.log(data);
       this.removeElementFromArray(etudiant);
+      this.getEtudiants();
+      this.searchTerm='';
       this.notification.showNotification('top','right','Etudiant deleted !','danger');
       }.bind(this,etudiant));
     
@@ -49,6 +59,9 @@ export class ManageEtudiantsComponent {
     this.listEtudiants.forEach((value,index)=>{
         if(value==element) this.listEtudiants.splice(index,1);
     });
+
+ 
+ 
 }
 
     updateModeActive(etudiant :Etudiant){
@@ -61,10 +74,44 @@ export class ManageEtudiantsComponent {
     etudiantUpdated(etudiant :Etudiant){
       this.updateMode=false;
       this.createMode=true;
-    
+      this.getEtudiants();
+      this.searchTerm='';
     }
 
    goToAdmin() {
     this.route.navigate(['dashboard']);
+    }
+
+    openPopup(id:Number) {
+      this.emailMessage="";
+      this.selectedId=id;
+      this.displayStyle = "block";
+      
+     
+    }
+
+    etudiantAdded($event){
+      this.getEtudiants();
+      this.searchTerm='';
+    }
+
+    sendEmail(){
+      console.log(this.emailMessage);
+      this.btnDisplay=true;
+      this.etudiantService.sendEmailToEtudiant(this.selectedId,this.emailMessage).subscribe(response=> {
+        
+        this.closePopup();
+        this.notification.showNotification('top','right','Email sent !','success');
+      } );
+    }
+    closePopup() {
+      this.displayStyle = "none";
+      this.btnDisplay=false;
+    }
+
+    search(value: string): void {
+      this.etudiants = this.listEtudiants.filter((val) =>
+        val.email.toLowerCase().includes(value) 
+      );
     }
 }

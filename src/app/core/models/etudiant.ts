@@ -4,6 +4,7 @@ export class Etudiant{
     option!: string;
     nom!: string;
     prenom!: string;
+    email!: string;
 
   constructor() {
   }  
