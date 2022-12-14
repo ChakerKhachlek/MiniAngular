@@ -14,6 +14,7 @@ import "jspdf-autotable";
 })
 export class ManageEquipesComponent {
   selectedEquipe:Equipe ;
+  searchText;
 
    listEquipes:Equipe[] = [];
   updateB =false;

@@ -22,7 +22,7 @@ import { AddDepartmentComponent } from './manage-departments/create-departments/
 import { UpdateDepartmentComponent } from './manage-departments/update-department/update-department.component';
 import { SearchFilterPipe } from './search-filter.pipe';
 
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ManageContratsModule } from './manage-contrats/manage-contrats.module';
 
@@ -42,6 +42,7 @@ import { ManageContratsModule } from './manage-contrats/manage-contrats.module';
     MatInputModule,
     MatInputModule,
     ManageContratsModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     AppComponent,
