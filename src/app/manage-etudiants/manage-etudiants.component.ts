@@ -12,59 +12,60 @@ import { data } from 'jquery';
 })
 export class ManageEtudiantsComponent {
 
-  createMode : boolean ;
-  updateMode : boolean ;
+  createMode: boolean;
+  updateMode: boolean;
 
-   listEtudiants:Etudiant[] ;
+  listEtudiants: Etudiant[];
   selectedEtudiant: Etudiant;
 
-  constructor( private route:Router,private etudiantService : EtudiantServiceService,private notification : NotificationServiceService){
-   this.listEtudiants=[];
+  constructor(private route: Router, private etudiantService: EtudiantServiceService,
+    private notification: NotificationServiceService) {
+    this.listEtudiants = [];
   }
   ngOnInit(): void {
     this.getEtudiants();
-    this.createMode=true;
-    this.updateMode=false;
+    this.createMode = true;
+    this.updateMode = false;
   }
 
-  getEtudiants(){
+  getEtudiants() {
     this.etudiantService.getAllEtudiants().subscribe(data => {
-      this.listEtudiants= data;
+      this.listEtudiants = data;
       console.log(data);
-      
-    });
-    
-   }
 
-   removeEtudiant(etudiant:Etudiant){
-    this.etudiantService.deleteEtudiant(etudiant.id).subscribe(function(etudiant,data) {
+    });
+
+  }
+
+  removeEtudiant(etudiant: Etudiant) {
+    this.etudiantService.deleteEtudiant(etudiant.id).subscribe(function (etudiant, data) {
       console.log(data);
       this.removeElementFromArray(etudiant);
-      this.notification.showNotification('top','right','Etudiant deleted !','danger');
-      }.bind(this,etudiant));
-    
-   }
+      this.notification.showNotification('top', 'right', 'Etudiant deleted !', 'danger');
+    }.bind(this, etudiant));
+
+  }
 
   removeElementFromArray(element: Etudiant) {
-    this.listEtudiants.forEach((value,index)=>{
-        if(value==element) this.listEtudiants.splice(index,1);
+    this.listEtudiants.forEach((value, index) => {
+      if (value == element) this.listEtudiants.splice(index, 1);
     });
-}
+  }
 
-    updateModeActive(etudiant :Etudiant){
-      this.selectedEtudiant=etudiant;
-      this.createMode=false;
-      this.updateMode=true;
-     
-    }
-    
-    etudiantUpdated(etudiant :Etudiant){
-      this.updateMode=false;
-      this.createMode=true;
-    
-    }
+  updateModeActive(etudiant: Etudiant) {
+    this.selectedEtudiant = etudiant;
+    this.createMode = false;
+    this.updateMode = true;
 
-   goToAdmin() {
+  }
+
+  etudiantUpdated(etudiant: Etudiant) {
+    this.updateMode = false;
+    this.createMode = true;
+
+  }
+
+  goToAdmin() {
     this.route.navigate(['dashboard']);
-    }
+  }
 }

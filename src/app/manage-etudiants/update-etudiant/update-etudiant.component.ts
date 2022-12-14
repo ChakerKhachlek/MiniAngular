@@ -9,20 +9,20 @@ import { NotificationServiceService } from 'app/core/services/notification-servi
   templateUrl: './update-etudiant.component.html',
   styleUrls: ['./update-etudiant.component.scss']
 })
-export class UpdateEtudiantComponent implements OnInit{
+export class UpdateEtudiantComponent implements OnInit {
 
-  @Input() listEtudiants:Etudiant[] ;
-  @Input() selectedEtudiant:Etudiant ;
-  @Input()  createMode : boolean;
-  @Input()  updateMode : boolean;
+  @Input() listEtudiants: Etudiant[];
+  @Input() selectedEtudiant: Etudiant;
+  @Input() createMode: boolean;
+  @Input() updateMode: boolean;
   @Output() requested = new EventEmitter<Etudiant>();
-  
-  constructor(private fb:FormBuilder, private etudiantService: EtudiantServiceService,private notification :NotificationServiceService){}
- 
 
- 
-  reactiveForm = this.fb.group({  
-    nom:['', [Validators.required, Validators.minLength(3)]],
+  constructor(private fb: FormBuilder, private etudiantService: EtudiantServiceService, private notification: NotificationServiceService) { }
+
+
+
+  reactiveForm = this.fb.group({
+    nom: ['', [Validators.required, Validators.minLength(3)]],
     prenom: ['', [Validators.required, Validators.minLength(3)]],
     option: ['', [Validators.required]],
   });
@@ -33,32 +33,32 @@ export class UpdateEtudiantComponent implements OnInit{
     this.reactiveForm.get('option').setValue(this.selectedEtudiant.option);
   }
 
-  updateEtudiant(){
-    if(this.reactiveForm.valid){
-      let newEtudiant=new Etudiant();
- 
+  updateEtudiant() {
+    if (this.reactiveForm.valid) {
+      let newEtudiant = new Etudiant();
+
       newEtudiant.nom = this.reactiveForm.get('nom').value;
       newEtudiant.prenom = this.reactiveForm.get('prenom').value;
       newEtudiant.option = this.reactiveForm.get('option').value;
-  
-      newEtudiant.id=this.selectedEtudiant.id;
-  
-      this.etudiantService.updateEtudiant(newEtudiant).subscribe(function(selectedEtudiant,newEtudiant) {
-        console.log(this.selectedEtudiant,newEtudiant);
-        this.updateElementFromArray(selectedEtudiant,newEtudiant as Etudiant);
-      
+
+      newEtudiant.id = this.selectedEtudiant.id;
+
+      this.etudiantService.updateEtudiant(newEtudiant).subscribe(function (selectedEtudiant, newEtudiant) {
+        console.log(this.selectedEtudiant, newEtudiant);
+        this.updateElementFromArray(selectedEtudiant, newEtudiant as Etudiant);
+
         this.requested.emit(newEtudiant);
-        this.notification.showNotification('top','right','Etudiant updated !','warning');
-        console.log(this.updateMode,this.createMode);
-      }.bind(this,this.selectedEtudiant) );
-      
+        this.notification.showNotification('top', 'right', 'Etudiant updated !', 'warning');
+        console.log(this.updateMode, this.createMode);
+      }.bind(this, this.selectedEtudiant));
+
     }
-    
- 
+
+
   }
-  updateElementFromArray(element: Etudiant,newElement : Etudiant) {
-    this.listEtudiants.forEach((value,index)=>{
-        if(value==element) this.listEtudiants[index]=newElement;
+  updateElementFromArray(element: Etudiant, newElement: Etudiant) {
+    this.listEtudiants.forEach((value, index) => {
+      if (value == element) this.listEtudiants[index] = newElement;
     });
-}
+  }
 }
