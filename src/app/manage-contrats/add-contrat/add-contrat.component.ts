@@ -28,7 +28,7 @@ export class AddContratComponent {
   getEtudiants(){
     this.etudiantService.getAllEtudiants().subscribe(data => {
       this.listEtudiants= data;
-      console.log(data);
+      console.log(this.listEtudiants);
       
     });
     

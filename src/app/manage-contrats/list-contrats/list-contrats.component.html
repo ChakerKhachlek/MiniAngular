@@ -32,6 +32,11 @@
 </div>
 
     <div class="container-fluid">
+
+        <mat-form-field class="example-full-width">
+            <i class="material-icons ">search</i>
+        <input matInput  type="text" placeholder="search by amount" [(ngModel)]="searchArchive" (input)="search()" />
+    </mat-form-field>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -66,7 +71,7 @@
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let contrat of listContrats">
+                                    <tr *ngFor="let contrat of listContrats1">
                                         <td>{{contrat.idContrat}}</td>
                                         <td>{{contrat.specialite}}</td>
                                         <td>{{contrat.archive}}</td>

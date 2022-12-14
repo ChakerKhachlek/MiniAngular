@@ -13,8 +13,10 @@ import { NotificationServiceService } from 'app/core/services/notification-servi
   styleUrls: ['./list-contrats.component.scss']
 })
 export class ListContratsComponent {
+  searchArchive:string='';
   createMode: boolean;
   listContrats: Contrat[] = [];
+  listContrats1 :Contrat[]=[];
   contrat: Contrat;
   constructor(private route: Router, private contratService: ContratServiceService, public dialog: MatDialog, private notification: NotificationServiceService) {
 
@@ -27,6 +29,10 @@ export class ListContratsComponent {
     this.contratService.getAllContrats().subscribe(data => {
       this.listContrats = data;
       console.log(data);
+      this.listContrats1=this.listContrats;
+      console.log(this.listContrats1);
+
+
     });
   }
 
@@ -62,7 +68,14 @@ export class ListContratsComponent {
   toggleCreatEtudiantForm(toggle: boolean) {
     this.createMode = toggle;
   }
-
+ search(): void {
+      if(this.searchArchive!==''){
+      this.listContrats1 = this.listContrats.filter((val) =>
+        String(val.montantContrat).includes(this.searchArchive) 
+      );}else{
+        this.listContrats1=this.listContrats;
+      }
+    }
 
 }
 

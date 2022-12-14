@@ -90,7 +90,7 @@
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Choose Etudiant</mat-label>
                                     <select matNativeControl formControlName="etudiant">
-                                        <option *ngFor="etudiant of listEtudiants; let i=index" value="i">{{etudiant.nom}}
+                                        <option *ngFor="let etudiant of listEtudiants; let i=index" value="i">{{etudiant.id}}:{{etudiant.nom}}
                                         </option>
 
 
