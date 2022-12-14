@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Ajouter Université</h4>
+                <p class="card-category">Ajouter Université</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="reactiveForm" (ngSubmit)="addUniversite()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Université" formControlName="nomUniversite">
+                                <small style="color: red;" *ngIf="reactiveForm.get('nomUniversite')?.errors?.['required'] &&
+                                reactiveForm.get('nomUniversite')?.touched">
+                                    université is required
+                                </small>
+                                <small style="color: red;" *ngIf="reactiveForm.get('nomUniversite')?.errors?.['minlength'] &&
+                                reactiveForm.get('nomUniversite')?.touched">
+                                    at least 3 caracters
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger pull-right">Add Universite</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

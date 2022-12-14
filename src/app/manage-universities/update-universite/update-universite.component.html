@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Update Universite</h4>
+                <p class="card-category">Update Universite {{ selectedUniversite.idUniv }}</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="reactiveForm" (ngSubmit)="updateUniversite()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Nom" formControlName="nomUniversite">
+                                <small style="color: red;" *ngIf="reactiveForm.get('nomUniversite')?.errors?.['required'] &&
+                                reactiveForm.get('nomUniversite')?.touched">
+                                    Université is required
+                                </small>
+                                <small style="color: red;" *ngIf="reactiveForm.get('nomUniversite')?.errors?.['minlength'] &&
+                                reactiveForm.get('nomUniversite')?.touched">
+                                    At least 3 caracters
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger pull-right">Update Universite</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
