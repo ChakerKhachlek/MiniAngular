@@ -106,12 +106,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Equipes</h4>
-                        <p class="card-category"> Informations des equipes </p>
+                        <h4 class="card-title ">Equipes</h4>                
+                        <p class="card-category"> Informations des equipes <button mat-raised-button  class="btn btn-success pull-right"(click)="download()">Exporter en PDF</button> </p>
+    
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
+                        <div class="table-responsive" >
+                            <table class="table" id="table" #table>
                                 <thead class="">
                                     <th>
                                         ID
@@ -134,7 +135,7 @@
                                   
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let e of listEquipes">
+                                    <tr *ngFor="let e of listEquipes; index as i">
                                         <td>
                                             {{e.idEquipe}}
                                         </td>
