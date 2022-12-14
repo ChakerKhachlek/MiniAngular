@@ -63,15 +63,9 @@ export class ManageEquipesComponent {
         this.getAllEquipes;
         this.notification.showNotification('top','right','Equipe supprimé avec succès !','danger');
         }.bind(this,e));
+        location.reload;
     
         
-    //   this.EquipeS.deleteEquipe(e).subscribe(data =>{
-    //     this.removeElementFromArray(e);
-      
-    //   this.notification.showNotification('top','right','Equipe supprimé avec succès !','success');
-
-    // }.bind(this,e));
-  
     }
 
 
