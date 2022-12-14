@@ -13,6 +13,8 @@ export class EquipeService {
   constructor( private http: HttpClient ) { }
   //URL du Backend
   url = "http://localhost:8089/kaddem/equipe/";
+  url2 = "http://localhost:8089/kaddem/DetailEquipe/";
+
 
   
   getAllEquipes(){
@@ -28,8 +30,12 @@ export class EquipeService {
   } 
 
   
-  updateEquipe(details: any) {
+  updateEquipe(details: Equipe) {
     return this.http.put(`${this.url}`+'update-equipe', details);
+  }
+
+  updateDetailEquipe(details: DetailsEquipe) {
+    return this.http.put(`${this.url2}`+'update-detailEquipe', details);
   }
 
   deletebaseurl=this.url+'remove-equipe';

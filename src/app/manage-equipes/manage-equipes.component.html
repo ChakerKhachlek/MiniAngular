@@ -106,12 +106,21 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Equipes</h4>
+                        <h4 class="card-title ">Equipes</h4>                
                         <p class="card-category"> Informations des equipes </p>
+                        <div class="row pull-right" >
+                       
+                                
+                              <input class="form-control col-md-4" type="text" placeholder="search" name="search" [(ngModel)]="searchText" autocomplete="off"/>
+                              <button mat-raised-button  class="btn btn-success mx-4"(click)="download()">Exporter en PDF</button>
+                            
+                     </div>
+                            
+    
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
+                        <div class="table-responsive" >
+                            <table class="table" id="table" #table>
                                 <thead class="">
                                     <th>
                                         ID
@@ -134,7 +143,7 @@
                                   
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let e of listEquipes">
+                                    <tr *ngFor="let e of listEquipes | filter:searchText; index as i">
                                         <td>
                                             {{e.idEquipe}}
                                         </td>
