@@ -27,7 +27,7 @@
 <div class="row">
     <div class="col-md-12">
     <app-add-contrat (createModeEvent)="toggleCreatEtudiantForm($event)" [listContrats]="listContrats"*ngIf="createMode"></app-add-contrat>
-    <button (click)="toggleCreatEtudiantForm(true)" *ngIf="!createMode" class="btn btn-sm btn-info pull-left">Create Etudiant<i class="material-icons ">edit</i></button>
+    <button (click)="toggleCreatEtudiantForm(true)" *ngIf="!createMode" class="btn btn-sm btn-info pull-left">Create Contract<i class="material-icons ">add</i></button>
 
 </div>
 
@@ -36,8 +36,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title ">Contracts Table</h4>
+                        <p class="card-category"> contracts list </p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

@@ -132,7 +132,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <mat-form-field class="example-full-width">
-                                            <input matInput [(ngModel)]="data.archive" placeholder="Archive" formControlName="archive" required>
+                                            <select matNativeControl [(ngModel)]="data.archive" formControlName="archive" required>
+                                                <option selected value="true">true</option>
+                                                <option value="false">false</option>
+        
+        
+                                            </select>
+                                            
                                         </mat-form-field>
                                         <small style="color: red;" *ngIf="reactiveForm.get('archive')?.errors?.['required'] &&
                                 reactiveForm.get('archive')?.touched"> Please put the archive </small>

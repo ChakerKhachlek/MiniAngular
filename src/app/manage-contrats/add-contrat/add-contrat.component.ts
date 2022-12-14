@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contrat } from 'app/core/models/contrat';
+import { Etudiant } from 'app/core/models/etudiant';
 import { ContratServiceService } from 'app/core/services/contrats/contrat-service.service';
+import { EtudiantServiceService } from 'app/core/services/etudiants/etudiant-service.service';
 import { NotificationServiceService } from 'app/core/services/notification-service.service';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-add-contrat',
@@ -12,17 +13,33 @@ import { catchError } from 'rxjs';
 })
 export class AddContratComponent {
   create!: boolean;
+  listEtudiants:Etudiant[];
   @Output() createModeEvent = new EventEmitter<boolean>();
 
-  constructor(private fb: FormBuilder, private ContratService: ContratServiceService,private notification :NotificationServiceService) { }
+  constructor(private fb: FormBuilder,private etudiantService : EtudiantServiceService, private ContratService: ContratServiceService,private notification :NotificationServiceService) {
+    this.listEtudiants=[];
+   }
   @Input() listContrats: Contrat[];
+    
+  ngOnInit(): void {
+    this.getEtudiants();
+  }
 
+  getEtudiants(){
+    this.etudiantService.getAllEtudiants().subscribe(data => {
+      this.listEtudiants= data;
+      console.log(data);
+      
+    });
+    
+   }
   reactiveForm = this.fb.group({
     archive: ['', [Validators.required]],
     montant: ['', [Validators.required]],
     specialite: ['', [Validators.required]],
     dateDebutContrat: ['', [Validators.required]],
     dateFinContrat: ['', [Validators.required]],
+    etudiant:['']
   });
 
 
@@ -38,7 +55,7 @@ export class AddContratComponent {
       contrat.specialite = this.reactiveForm.get('specialite').value;
       contrat.dateDebutContrat = new Date(this.reactiveForm.get('dateDebutContrat').value);
       contrat.dateFinContrat = new Date(this.reactiveForm.get('dateFinContrat').value);
-
+     contrat.etudiant=this.listEtudiants[Number(this.reactiveForm.get('etudiant').value)];
       this.ContratService.addContrat(contrat).subscribe(contrat => {
         this.listContrats.push(contrat as Contrat);
         this.createModeEvent.emit(false);

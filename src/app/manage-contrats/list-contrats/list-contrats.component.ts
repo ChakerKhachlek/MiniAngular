@@ -30,29 +30,33 @@ export class ListContratsComponent {
     });
   }
 
-  uupdateContrat(contrat, Contrat) {
+  updateContrat(contrat: Contrat) {
     let dialogRef = this.dialog.open(UpdateContratComponent, {
       height: '590px',
       width: '600px',
       data: structuredClone(contrat)
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.contratService.updateContrat(result).subscribe(updatedContrat => {
-        console.log(updatedContrat);
-        this.listContrats.forEach((value, index) => {
-          if (value.idContrat === updatedContrat.idContrat)
-            this.listContrats[index] = updatedContrat;
-        });
-        this.notification.showNotification('top', 'right', 'contract updated !', 'success');
-      },error=>this.notification.showNotification('top','right','Server Error, contract is not updated !','danger'));
-      console.log('The dialog was closed', result);
+      if (result) {
+        this.contratService.updateContrat(result).subscribe(updatedContrat => {
+          console.log(updatedContrat);
+          this.listContrats.forEach((value, index) => {
+            if (value.idContrat === updatedContrat.idContrat)
+              this.listContrats[index] = updatedContrat;
+          });
+          this.notification.showNotification('top', 'right', 'contract updated !', 'success');
+        }, error => this.notification.showNotification('top', 'right', 'Server Error, contract is not updated !', 'danger'));
+      } console.log('The dialog was closed', result);
       console.log('The dialog was closed', this.listContrats);
     });
   }
   removeContrat(idContrat: number) {
     this.contratService.deleteContrat(idContrat).subscribe(data => {
       console.log("Le contrat est supprimé");
-      window.location.reload()
+      this.notification.showNotification('top', 'right', 'contract deleted !', 'success');
+      this.listContrats.forEach((value,index)=>{
+        if(value.idContrat==idContrat) this.listContrats.splice(index,1);
+    });
     })
   }
   toggleCreatEtudiantForm(toggle: boolean) {
