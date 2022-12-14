@@ -28,4 +28,11 @@ export class ContratServiceService {
   deleteContrat(id:Number){
     return this.http.delete(this.url+'remove-contrat/'+id);
   }
+  getChiffreAffaireEntreDeuxDate(start: Date, end:Date){
+    return this.http.get(this.url+'ChiffreAffaire-EntreDeuxDate/'+start+'/'+end);
+  }
+  nbcontratsvalides(start: Date, end:Date){
+    return this.http.get(this.url+'nb-contrats-valides/'+start+'/'+end);
+    
+  }
 }

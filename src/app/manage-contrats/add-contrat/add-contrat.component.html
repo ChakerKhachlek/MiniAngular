@@ -70,7 +70,7 @@
                             <small style="color: red;"
                                 *ngIf="!reactiveForm.get('dateDebutContrat')?.errors?.['required'] && !reactiveForm.get('dateFinContrat')?.errors?.['required']
                                 && reactiveForm.get('dateDebutContrat').value > reactiveForm.get('dateFinContrat').value"> the start date
-                                should be after the end date </small>
+                                should be before the end date </small>
                         </div>
                         <div class="col-md-4">
                             <mat-form-field appearance="fill">

@@ -6,6 +6,7 @@ import { UpdateContratComponent } from '../update-contrat/update-contrat.compone
 import { MatDialog } from '@angular/material/dialog';
 import { data } from 'jquery';
 import { NotificationServiceService } from 'app/core/services/notification-service.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-contrats',
@@ -13,14 +14,21 @@ import { NotificationServiceService } from 'app/core/services/notification-servi
   styleUrls: ['./list-contrats.component.scss']
 })
 export class ListContratsComponent {
+  dateDebutContrat :Date;
+  dateFinContrat:Date;
+  dateDebContrat:Date;
+  dateFiContrat:Date;
+  show:boolean=false;
+
   searchArchive:string='';
   createMode: boolean;
   listContrats: Contrat[] = [];
   listContrats1 :Contrat[]=[];
   contrat: Contrat;
-  constructor(private route: Router, private contratService: ContratServiceService, public dialog: MatDialog, private notification: NotificationServiceService) {
+  constructor(private fb: FormBuilder,private route: Router, private contratService: ContratServiceService, public dialog: MatDialog, private notification: NotificationServiceService) {
 
   }
+  
   ngOnInit(): void {
     this.getContrats();
   }
@@ -35,7 +43,14 @@ export class ListContratsComponent {
 
     });
   }
-
+  reactiveForm = this.fb.group({
+    dateDebutContrat: ['', [Validators.required]],
+    dateFinContrat: ['', [Validators.required]],
+  });
+  reactiveForm1 = this.fb.group({
+    dateDebContrat: ['', [Validators.required]],
+    dateFiContrat: ['', [Validators.required]],
+  });
   updateContrat(contrat: Contrat) {
     let dialogRef = this.dialog.open(UpdateContratComponent, {
       height: '590px',
@@ -76,6 +91,29 @@ export class ListContratsComponent {
         this.listContrats1=this.listContrats;
       }
     }
-
+    ChiffreAffaireEntreDeuxDate(){
+      if (this.reactiveForm.valid) {
+        this.dateDebutContrat = new Date(this.reactiveForm.get('dateDebutContrat').value);
+        this.dateFinContrat = new Date(this.reactiveForm.get('dateFinContrat').value);
+        this.contratService.getChiffreAffaireEntreDeuxDate(this.dateDebutContrat,this.dateFinContrat).subscribe(montant => {
+            console.log(montant)
+           this.notification.showNotification('top','right','Contrat added !','success');  
+            },error => this.notification.showNotification('top','right','Server Error, contrat is not added !','danger'))
+                  this.show=true;
+           
+          
+  
+      }
+    }
+    nbContratsValides(){
+        this.dateDebContrat = new Date(this.reactiveForm.get('dateDebContrat').value);
+        this.dateFiContrat = new Date(this.reactiveForm.get('dateFiContrat').value);
+        this.contratService.nbcontratsvalides(this.dateDebContrat,this.dateFiContrat).subscribe(nombre => {
+            console.log(nombre)
+           this.notification.showNotification('top','right','Contrat added !','success');  
+            },error => this.notification.showNotification('top','right','Server Error, contrat is not added !','danger'))
+                  
+      }
+    
 }
 
