@@ -41,7 +41,7 @@ import { ManageContratsModule } from './manage-contrats/manage-contrats.module';
     MatFormFieldModule,
     MatInputModule,
     MatInputModule,
-
+     Ng2SearchPipeModule ,
     ManageContratsModule,
    
   ],

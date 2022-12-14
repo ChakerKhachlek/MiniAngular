@@ -36,7 +36,7 @@ export class ManageEquipesComponent {
     
    ngOnInit(): void {
      this.getlistEquipes();
-
+    
      
    }
  
@@ -44,8 +44,9 @@ export class ManageEquipesComponent {
      this.EquipeS.getAllEquipes().subscribe(data => {
        this.listEquipes= data;
        console.log("data :",data);
-       
+       console.log("liste :", this.listEquipes);
      });
+    
      
     }
     removeElementFromArray(element: Equipe) {
@@ -60,7 +61,9 @@ export class ManageEquipesComponent {
       this.EquipeS.deleteEquipe(e).subscribe(function(e,data) {
         console.log(data);
         this.removeElementFromArray(e);
-        this.getAllEquipes;
+
+        this.getlistEquipes();
+
         this.notification.showNotification('top','right','Equipe supprimé avec succès !','danger');
         }.bind(this,e));
         location.reload;
